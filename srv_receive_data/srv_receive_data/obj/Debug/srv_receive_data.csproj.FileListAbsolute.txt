@@ -1,0 +1,7 @@
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\bin\Debug\srv_receive_data.exe
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\bin\Debug\srv_receive_data.pdb
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\bin\Debug\srv_receive_data.exe.config
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.ProjectInstaller.resources
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.csproj.GenerateResource.Cache
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.exe
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.pdb
