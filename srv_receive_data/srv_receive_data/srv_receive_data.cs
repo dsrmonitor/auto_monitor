@@ -13,25 +13,19 @@ using srv_receive_data.source;
 namespace srv_receive_data
 {
     public partial class srv_receive_data : ServiceBase
-    {        
+    {
+        private Log objLog;
         public srv_receive_data()
         {
             InitializeComponent();            
-
+            objLog = new Log();
             //Loga a inicialização do serviço
-            Log.Debug("Initializing the Service ...");
+            objLog.Debug("Initializing the Service ...");
+            objLog.Debug("Initializing the Service2 ...");
 
-            readDataThread thread01 = new readDataThread();
+            readDataThread thread01 = new readDataThread(objLog);
 
             thread01.Call();
-            //int count = 0;
-            //while (true)
-            //{
-            //    objLog.WriteEntry("Test Samuel" + count);
-            //    System.Threading.Thread.Sleep(5000);
-            //}
-
-
         }
 
         protected override void OnStart(string[] args)

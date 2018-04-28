@@ -9,6 +9,13 @@ namespace srv_receive_data.source
 {
     class readDataThread
     {
+        private Log objLog;
+
+        public readDataThread(Log log)
+        {
+            objLog = log;
+        }
+
         public void Call()
         {
             System.Threading.ThreadStart ts =
@@ -23,7 +30,7 @@ namespace srv_receive_data.source
             int count = 0;
             while (true)
             {
-                Log.Debug("Teste samuel"+count);
+                objLog.Debug("Teste samuel"+count);
                 System.Threading.Thread.Sleep(5000);
                 count++;
             }

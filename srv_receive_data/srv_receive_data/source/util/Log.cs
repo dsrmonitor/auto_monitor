@@ -8,40 +8,52 @@ using System.IO;
 
 namespace srv_receive_data.source.util
 {
-    class Log
+class Log
     {
-        
-        public static bool Debug(string Valor)
+    public String logFileName { get;}
+
+    //private StreamWriter sw;
+    public Log()
+    {
+        //Busca o diretório atual
+        String logPath = Environment.CurrentDirectory+"\\Logs\\";
+
+        if (!Directory.Exists(logPath))
+        {
+            Directory.CreateDirectory(logPath);
+        }
+        //Monta o nome do log com a data atual
+        String logName = "src_service_" + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + "_" +
+                        DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second + ".log";
+
+        logFileName = logPath + logName;
+    }
+    public bool Debug(string Valor)
+    {
+
+        try
+        {
+            if (!File.Exists(logFileName))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(logFileName))
                 {
-            //Directory.GetCurrentDirectory()+"
-            string path = "c:\\Logs\\src_service_data_samuel_.log";//+ DateTime.Now.Year + "." + DateTime.Now.Month + "." + DateTime.Now.Day + ".log";
-
-                    try
-                    {
-
-                        if (!System.IO.File.Exists(path))
-                        {
-                            using (System.IO.StreamWriter sw = System.IO.File.CreateText(path))
-                            {
-                                sw.WriteLine(Valor);
-                            }
-                            return true;
-                        }
-                        else
-                        {
-                            using (System.IO.StreamWriter sw = System.IO.File.AppendText(path))
-                            {
-                                sw.WriteLine(Valor);
-                            }
-                            return true;
-                        }
-
-                    }
-                    catch (Exception e)
-                    {
-                        //Console.WriteLine("The process failed: {0}", e.ToString());
-                        return false;
-                    }
+                    sw.WriteLine(Valor);
                 }
             }
+            else
+            {
+                using (StreamWriter sw = File.AppendText(logFileName))
+                {
+                    sw.WriteLine(Valor);
+                }
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+  }
 }
