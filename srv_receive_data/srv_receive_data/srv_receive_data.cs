@@ -10,22 +10,35 @@ using System.Threading.Tasks;
 using srv_receive_data.source.util;
 using srv_receive_data.source;
 using srv_receive_data.source.constant;
+using System.IO.Ports;
 
 namespace srv_receive_data
 {
     public partial class srv_receive_data : ServiceBase
     {
         private Log objLog;
+        private SerialPort modemPort;
         public srv_receive_data()
         {
             InitializeComponent();
-
+            //Carrega o arquivo ini
             IniFile init = new IniFile(Constants.INIT_PATH, Constants.INIT_NAME);
+
+            //Cria o objeto de log
             objLog = new Log(init.IniReadInt("levelLog"), Constants.INIT_PATH);
             //Loga a inicializacao do servico
             objLog.WriteLog("Initializing the Service ...", Constants.LOG_TRACE);
 
-            readDataThread thread01 = new readDataThread(objLog);
+            //Conectando a porta serial
+            modemPort = utilSerialPort.OpenPort(
+                init.IniReadString("comPort", "COM1"),
+                init.IniReadInt("baudRate", 9600),
+                init.IniReadInt("dataBits", 8),
+                init.IniReadInt("readTimeout", 300),
+                init.IniReadInt("writeTimeout",300),
+                objLog);
+
+            readDataThread thread01 = new readDataThread(modemPort, objLog);
 
             thread01.Call();
         }

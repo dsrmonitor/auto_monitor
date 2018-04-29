@@ -5,3 +5,4 @@ C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data
 C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.csproj.GenerateResource.Cache
 C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.exe
 C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.pdb
+C:\git\auto_monitor\srv_receive_data\srv_receive_data\obj\Debug\srv_receive_data.csprojResolveAssemblyReference.cache

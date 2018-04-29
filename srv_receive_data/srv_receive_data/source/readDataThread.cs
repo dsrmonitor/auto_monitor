@@ -5,16 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using srv_receive_data.source.constant;
+using System.IO.Ports;
 
 namespace srv_receive_data.source
 {
     class readDataThread
     {
         private Log objLog;
+        private SMSMonitor objSmsMonitor;
 
-        public readDataThread(Log log)
+        //Inserido para testes, apagar depois
+        SerialPort objSerialPort;
+
+        public readDataThread(SerialPort port,  Log log)
         {
             objLog = log;
+            objSerialPort = port;
+            //Cria o objeto que irá manipular sms
+            objSmsMonitor = new SMSMonitor(port, objLog);
         }
 
         public void Call()
@@ -31,7 +39,10 @@ namespace srv_receive_data.source
             int count = 0;
             while (true)
             {
-                objLog.WriteLog("Teste samuel"+count,Constants.LOG_DEBUG);
+
+                objSmsMonitor.readMessages();
+                string t = objSerialPort.ReadExisting();
+                objLog.WriteLog("Teste samuel "+count+" serialPortData:"+t,Constants.LOG_DEBUG);
                 System.Threading.Thread.Sleep(5000);
                 count++;
             }

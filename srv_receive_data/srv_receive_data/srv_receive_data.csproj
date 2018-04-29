@@ -54,8 +54,11 @@
     </Compile>
     <Compile Include="source\constant\Constants.cs" />
     <Compile Include="source\readDataThread.cs" />
+    <Compile Include="source\SMSMessage.cs" />
+    <Compile Include="source\SMSMonitor.cs" />
     <Compile Include="source\util\IniFile.cs" />
     <Compile Include="source\util\Log.cs" />
+    <Compile Include="source\utilSerialPort.cs" />
     <Compile Include="srv_receive_data.cs">
       <SubType>Component</SubType>
     </Compile>
