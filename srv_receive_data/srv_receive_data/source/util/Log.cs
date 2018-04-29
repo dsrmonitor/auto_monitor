@@ -12,6 +12,7 @@ class Log
     {
     public String logFileName { get;}
     private int levelLog;
+    private String[] levelVallues = new String[] { "Exception", "Trace", "Debug" };
 
     //private StreamWriter sw;
     public Log(int level, String path)
@@ -41,14 +42,14 @@ class Log
                     // Create a file to write to.
                     using (StreamWriter sw = File.CreateText(logFileName))
                     {
-                        sw.WriteLine(Valor);
+                        sw.WriteLine(DateTime.Now+" - "+levelVallues[level-1]+": "+Valor);
                     }
                 }
                 else
                 {
                     using (StreamWriter sw = File.AppendText(logFileName))
                     {
-                        sw.WriteLine(Valor);
+                        sw.WriteLine(DateTime.Now+" - "+levelVallues[level-1]+": "+Valor);
                     }
                 }
             }
