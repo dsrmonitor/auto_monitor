@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using srv_receive_data.source.constant;
 
 namespace srv_receive_data.source
 {
@@ -30,7 +31,7 @@ namespace srv_receive_data.source
             int count = 0;
             while (true)
             {
-                objLog.Debug("Teste samuel"+count);
+                objLog.WriteLog("Teste samuel"+count,Constants.LOG_DEBUG);
                 System.Threading.Thread.Sleep(5000);
                 count++;
             }

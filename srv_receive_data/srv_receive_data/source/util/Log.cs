@@ -11,13 +11,14 @@ namespace srv_receive_data.source.util
 class Log
     {
     public String logFileName { get;}
+    private int levelLog;
 
     //private StreamWriter sw;
-    public Log()
+    public Log(int level, String path)
     {
+        levelLog = level;
         //Busca o diretório atual
-        String logPath = Environment.CurrentDirectory+"\\Logs\\";
-
+        String logPath = path+"\\Logs\\";
         if (!Directory.Exists(logPath))
         {
             Directory.CreateDirectory(logPath);
@@ -28,24 +29,27 @@ class Log
 
         logFileName = logPath + logName;
     }
-    public bool Debug(string Valor)
+    public bool WriteLog(string Valor, byte level)
     {
 
         try
         {
-            if (!File.Exists(logFileName))
+            if (level <= levelLog)
             {
-                // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(logFileName))
+                if (!File.Exists(logFileName))
                 {
-                    sw.WriteLine(Valor);
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(logFileName))
+                    {
+                        sw.WriteLine(Valor);
+                    }
                 }
-            }
-            else
-            {
-                using (StreamWriter sw = File.AppendText(logFileName))
+                else
                 {
-                    sw.WriteLine(Valor);
+                    using (StreamWriter sw = File.AppendText(logFileName))
+                    {
+                        sw.WriteLine(Valor);
+                    }
                 }
             }
             return true;

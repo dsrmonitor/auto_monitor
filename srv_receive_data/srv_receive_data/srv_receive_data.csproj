@@ -52,7 +52,9 @@
     <Compile Include="ProjectInstaller.Designer.cs">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
+    <Compile Include="source\constant\Constants.cs" />
     <Compile Include="source\readDataThread.cs" />
+    <Compile Include="source\util\IniFile.cs" />
     <Compile Include="source\util\Log.cs" />
     <Compile Include="srv_receive_data.cs">
       <SubType>Component</SubType>
