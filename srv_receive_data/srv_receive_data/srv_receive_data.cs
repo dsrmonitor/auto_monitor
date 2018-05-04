@@ -11,6 +11,8 @@ using srv_receive_data.source.util;
 using srv_receive_data.source;
 using srv_receive_data.source.constant;
 using System.IO.Ports;
+using Repository.Entities;
+using Repository;
 
 namespace srv_receive_data
 {
@@ -23,6 +25,11 @@ namespace srv_receive_data
             InitializeComponent();
             //Carrega o arquivo ini
             IniFile init = new IniFile(Constants.INIT_PATH, Constants.INIT_NAME);
+
+            sms_not_recognized sms = new sms_not_recognized();
+            sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
+            sms.text = "Teste Samuel";
+            dao.insert(sms);
 
             //Cria o objeto de log
             objLog = new Log(init.IniReadInt("levelLog"), Constants.INIT_PATH);

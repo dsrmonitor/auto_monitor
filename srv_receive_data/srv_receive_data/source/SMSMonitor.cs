@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Repository;
+using Repository.Entities;
 
 namespace srv_receive_data.source
 {
@@ -93,7 +95,11 @@ namespace srv_receive_data.source
                             objLog.WriteLog("Contato: " + msg.sender,Constants.LOG_TRACE);
                             objLog.WriteLog("Mensagem: " + msg.message, Constants.LOG_TRACE);
                             objLog.WriteLog("===============================", Constants.LOG_TRACE);
+                            
+
                             deleteMsg(msg.index);
+                            
+
 
                         }
                     }
