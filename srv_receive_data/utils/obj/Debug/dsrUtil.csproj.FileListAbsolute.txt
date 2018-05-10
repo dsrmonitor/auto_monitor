@@ -1,4 +1,0 @@
-C:\git\auto_monitor\srv_receive_data\utils\bin\Debug\utils.dll
-C:\git\auto_monitor\srv_receive_data\utils\bin\Debug\utils.pdb
-C:\git\auto_monitor\srv_receive_data\utils\obj\Debug\utils.dll
-C:\git\auto_monitor\srv_receive_data\utils\obj\Debug\utils.pdb
