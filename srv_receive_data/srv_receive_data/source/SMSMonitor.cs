@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Repository;
 using Repository.Entities;
+using dsrUtil;
 
 namespace srv_receive_data.source
 {
@@ -94,23 +95,20 @@ namespace srv_receive_data.source
                             objLog.WriteLog("=======Arrive Message =========",Constants.LOG_TRACE);
                             objLog.WriteLog("Contato: " + msg.sender,Constants.LOG_TRACE);
                             objLog.WriteLog("Mensagem: " + msg.message, Constants.LOG_TRACE);
+                            objLog.WriteLog("Índice:" + msg.index, Constants.LOG_TRACE);
                             objLog.WriteLog("===============================", Constants.LOG_TRACE);
-                            
 
-                            deleteMsg(msg.index);
-                            
+                            sms_not_recognized sms = new sms_not_recognized();
+                            sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
+                            sms.message = msg.message;
+                            sms.index = msg.index;
+                            sms.sender = msg.sender;
+                            sms.alphabet = msg.alphabet;
+                            dao.insert(sms);
 
-
+                            deleteMsg(msg.index);    
                         }
                     }
-                    else
-                    {
-                        objLog.WriteLog("não leu a mensagem",Constants.LOG_TRACE);
-                    }
-
-                    //objLog.WriteLog("Arrive Message:" + input, Constants.LOG_TRACE);
-
-                    
                 }
                 else
                 {
@@ -139,7 +137,7 @@ namespace srv_receive_data.source
                     msg.status = m.Groups[2].Value;
                     msg.sender = m.Groups[3].Value;
                     msg.alphabet = m.Groups[4].Value;
-                    msg.sentDate = m.Groups[5].Value;
+                    //msg.sentDate = m.Groups[5].Value;
                     msg.message = m.Groups[6].Value;
                 
                     result.Add(msg);
@@ -157,13 +155,22 @@ namespace srv_receive_data.source
         }
         private bool deleteMsg(int index)
         {
-            // Check connection
-            string input = ExecCommand(objSerialPort, "AT", 1000);
-
-            if (input != "")
+            string input = "";
+            try
             {
-                input = ExecCommand(objSerialPort, "AT+CMGD=" + index, 1000);
+                // Check connection
+                input = ExecCommand(objSerialPort, "AT", 1000);
+
+                if (input != "")
+                {
+                    input = ExecCommand(objSerialPort, "AT+CMGD=" + index, 1000);
+                }                
             }
+            catch (Exception ex)
+            {
+                objLog.WriteLog("Erro ao deletar mensagem (índice:" + index + ")", Constants.LOG_EXCEPTION);
+            }
+
             if (input.Contains("OK"))
             {
                 return (true);

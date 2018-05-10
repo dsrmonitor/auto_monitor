@@ -11,4 +11,9 @@ C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\FluentNHibernate.pdb
 C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\FluentNHibernate.xml
 C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\Iesi.Collections.xml
 C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\NHibernate.xml
+C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\Npgsql.xml
+C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\utils.dll
+C:\git\auto_monitor\srv_receive_data\Repository\bin\Debug\utils.pdb
 C:\git\auto_monitor\srv_receive_data\Repository\obj\Debug\Repository.csprojResolveAssemblyReference.cache

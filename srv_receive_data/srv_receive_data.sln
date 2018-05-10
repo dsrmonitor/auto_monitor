@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "srv_receive_data", "srv_rec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{9E1BE464-E887-4596-B222-CEEF7B406915}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dsrUtil", "utils\dsrUtil.csproj", "{358C0C14-53EA-44F5-AB78-4444D112D0D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9E1BE464-E887-4596-B222-CEEF7B406915}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E1BE464-E887-4596-B222-CEEF7B406915}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E1BE464-E887-4596-B222-CEEF7B406915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358C0C14-53EA-44F5-AB78-4444D112D0D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358C0C14-53EA-44F5-AB78-4444D112D0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358C0C14-53EA-44F5-AB78-4444D112D0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358C0C14-53EA-44F5-AB78-4444D112D0D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

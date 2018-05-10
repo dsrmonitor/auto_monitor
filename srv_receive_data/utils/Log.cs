@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 
-namespace srv_receive_data.source.util
+namespace dsrUtil
 {
-class Log
+public class Log
     {
     public String logFileName { get;}
     private int levelLog;

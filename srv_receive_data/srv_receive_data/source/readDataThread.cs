@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using srv_receive_data.source.constant;
 using System.IO.Ports;
+using dsrUtil;
 
 namespace srv_receive_data.source
 {
     class readDataThread
     {
+        
         private Log objLog;
         private SMSMonitor objSmsMonitor;
 

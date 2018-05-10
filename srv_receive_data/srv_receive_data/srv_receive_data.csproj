@@ -45,10 +45,18 @@
       <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Npgsql, Version=3.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.2.7\lib\net451\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,8 +76,6 @@
     <Compile Include="source\readDataThread.cs" />
     <Compile Include="source\SMSMessage.cs" />
     <Compile Include="source\SMSMonitor.cs" />
-    <Compile Include="source\util\IniFile.cs" />
-    <Compile Include="source\util\Log.cs" />
     <Compile Include="source\utilSerialPort.cs" />
     <Compile Include="srv_receive_data.cs">
       <SubType>Component</SubType>
@@ -93,6 +99,10 @@
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{9e1be464-e887-4596-b222-ceef7b406915}</Project>
       <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\utils\dsrUtil.csproj">
+      <Project>{358c0c14-53ea-44f5-ab78-4444d112d0d5}</Project>
+      <Name>dsrUtil</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

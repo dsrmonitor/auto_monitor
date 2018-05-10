@@ -1,19 +1,33 @@
-﻿using FluentNHibernate.Cfg;
+﻿using dsrUtil;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Tool.hbm2ddl;
+using Repository.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dsrUtil.constant;
 
 namespace Repository
 {
     public class sessionFacrtoy
     {
-        private static String conString = "Server=localhost;Port=5432;User Id=postgres;Password=admdb;Database=dsr_monitor;";
+        private static String conString;
         private static ISessionFactory session;
+        private static Log objLog;
 
+        public static void setObjLog(Log obj)
+        {
+            objLog = obj;
+        }
+
+        public static void setConString(String aConStr)
+        {
+            conString = aConStr;
+        }
         public static ISessionFactory createSession()
         {
             if (session != null)
@@ -22,18 +36,18 @@ namespace Repository
             }
             try
             {
-                IPersistenceConfigurer configDB = PostgreSQLConfiguration.PostgreSQL82.ConnectionString(conString);
-                //var configMap = Fluently.Configure()
-                //    .Database(configDB)
-                //    .Mappings(c => 
-                //        c.FluentMappings
-                //        .AddFromAssemblyOf<Mapping.sms_not_recognizedMap>());
+                IPersistenceConfigurer configDB = PostgreSQLConfiguration.PostgreSQL82.ConnectionString(conString);      
+
                 var configMap = Fluently.Configure().Database(configDB).Mappings(c => c.FluentMappings.AddFromAssemblyOf<Mapping.sms_not_recognizedMap>());
+
+                
+
+
                 session = configMap.BuildSessionFactory();
             }
             catch(Exception ex)
             {
-                String tst = ex.ToString();
+                objLog.WriteLog("Erro ao conectar no banco de dados:"+ex.ToString(), Constants.LOG_EXCEPTION );
             }
             
 

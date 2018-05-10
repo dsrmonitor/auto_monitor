@@ -13,6 +13,7 @@ using srv_receive_data.source.constant;
 using System.IO.Ports;
 using Repository.Entities;
 using Repository;
+using dsrUtil;
 
 namespace srv_receive_data
 {
@@ -24,17 +25,15 @@ namespace srv_receive_data
         {
             InitializeComponent();
             //Carrega o arquivo ini
-            IniFile init = new IniFile(Constants.INIT_PATH, Constants.INIT_NAME);
-
-            sms_not_recognized sms = new sms_not_recognized();
-            sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
-            sms.text = "Teste Samuel";
-            dao.insert(sms);
+            IniFile init = new IniFile(Constants.INIT_PATH, Constants.INIT_NAME);            
 
             //Cria o objeto de log
             objLog = new Log(init.IniReadInt("levelLog"), Constants.INIT_PATH);
             //Loga a inicializacao do servico
             objLog.WriteLog("Initializing the Service ...", Constants.LOG_TRACE);
+
+            //Buscando String de conexão
+            sessionFacrtoy.setConString(init.IniReadString("conString"));
 
             //Conectando a porta serial
             modemPort = utilSerialPort.OpenPort(
@@ -49,7 +48,11 @@ namespace srv_receive_data
 
             thread01.Call();
         }
-
+        private void setLogObjects()
+        {
+            //Seta o objeto da classe de conexão do nHibernate
+            sessionFacrtoy.setObjLog(objLog);
+        }
         protected override void OnStart(string[] args)
         {
         }

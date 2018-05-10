@@ -6,7 +6,7 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 
-namespace srv_receive_data.source.util
+namespace dsrUtil
 {
     public class IniFile
     {

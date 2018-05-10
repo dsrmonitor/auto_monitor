@@ -12,7 +12,6 @@ namespace srv_receive_data.source
         public String status { get; set; }
         public String sender { get; set; }
         public String alphabet { get; set; }
-        public String sentDate { get; set; }
         public String message { get; set; }
     }
 }

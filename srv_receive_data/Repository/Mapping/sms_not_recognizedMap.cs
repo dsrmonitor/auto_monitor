@@ -14,7 +14,10 @@ namespace Repository.Mapping
         public sms_not_recognizedMap()
         {
             Id(c => c.id);
-            Map(c => c.text);
+            Map(c => c.message);
+            Map(c => c.index);
+            Map(c => c.sender);
+            Map(c => c.alphabet);
             Table("sms_not_recognized");
         }        
     }
