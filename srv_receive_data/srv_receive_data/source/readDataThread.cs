@@ -44,7 +44,7 @@ namespace srv_receive_data.source
 
                 objSmsMonitor.readMessages();
                 string t = objSerialPort.ReadExisting();
-                objLog.WriteLog("Teste samuel "+count+" serialPortData:"+t,Constants.LOG_DEBUG);
+                objLog.writeDebugLog("Teste samuel "+count+" serialPortData:"+t);
                 System.Threading.Thread.Sleep(5000);
                 count++;
             }

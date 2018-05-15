@@ -64,13 +64,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\sms_queue_send.cs" />
     <Compile Include="IdsrMonitorDAO.cs" />
     <Compile Include="Entities\sms_not_recognized.cs" />
     <Compile Include="Mapping\sms_not_recognizedMap.cs" />
+    <Compile Include="Mapping\sms_queue_sendMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reposiroryDSRDAO.cs" />
     <Compile Include="sessionFacrtoy.cs" />
     <Compile Include="sms_not_recognizedRepository.cs" />
+    <Compile Include="sms_queue_sendRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

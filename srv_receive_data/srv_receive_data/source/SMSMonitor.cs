@@ -92,11 +92,11 @@ namespace srv_receive_data.source
 
                         foreach(var msg in messages)
                         {
-                            objLog.WriteLog("=======Arrive Message =========",Constants.LOG_TRACE);
-                            objLog.WriteLog("Contato: " + msg.sender,Constants.LOG_TRACE);
-                            objLog.WriteLog("Mensagem: " + msg.message, Constants.LOG_TRACE);
-                            objLog.WriteLog("Índice:" + msg.index, Constants.LOG_TRACE);
-                            objLog.WriteLog("===============================", Constants.LOG_TRACE);
+                            objLog.writeTraceLog("=======Arrive Message =========");
+                            objLog.writeTraceLog("Contato: " + msg.sender);
+                            objLog.writeTraceLog("Mensagem: " + msg.message);
+                            objLog.writeTraceLog("Índice:" + msg.index);
+                            objLog.writeTraceLog("===============================");
 
                             sms_not_recognized sms = new sms_not_recognized();
                             sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
@@ -112,12 +112,12 @@ namespace srv_receive_data.source
                 }
                 else
                 {
-                    objLog.WriteLog("Moden indisponível para leitura de mensagens",Constants.LOG_DEBUG);
+                    objLog.writeDebugLog("Moden indisponível para leitura de mensagens");
                 }
             }
             catch (Exception ex)
             {
-                objLog.WriteLog("Erro ao ler SMS:" + ex, Constants.LOG_EXCEPTION);
+                objLog.writeExceptionLog("Erro ao ler SMS 001:" + ex);
                 throw ex;
             }
             return "";
@@ -148,7 +148,7 @@ namespace srv_receive_data.source
             }
             catch (Exception ex)
             {
-                objLog.WriteLog("Erro ao processar SMS:" + ex, Constants.LOG_EXCEPTION);
+                objLog.writeExceptionLog("Erro ao processar SMS:" + ex);
                 throw ex;
             }
             return (result);
@@ -168,7 +168,7 @@ namespace srv_receive_data.source
             }
             catch (Exception ex)
             {
-                objLog.WriteLog("Erro ao deletar mensagem (índice:" + index + ")", Constants.LOG_EXCEPTION);
+                objLog.writeExceptionLog("Erro ao deletar mensagem (índice:" + index + ")");
             }
 
             if (input.Contains("OK"))

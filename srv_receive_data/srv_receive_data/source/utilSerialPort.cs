@@ -21,7 +21,7 @@ namespace srv_receive_data.source.util
 
             try
             {
-                objLog.WriteLog("Abrindo porta serial("+p_strPortName+")", Constants.LOG_TRACE);
+                objLog.writeTraceLog("Abrindo porta serial("+p_strPortName+")");
                 port.PortName = p_strPortName;                 //COM1
                 port.BaudRate = p_uBaudRate;                   //9600
                 port.DataBits = p_uDataBits;                   //8
@@ -38,7 +38,7 @@ namespace srv_receive_data.source.util
             }
             catch (Exception ex)
             {
-                objLog.WriteLog("Erro ao abrir porta serial:" + ex, Constants.LOG_EXCEPTION);
+                objLog.writeExceptionLog("Erro ao abrir porta serial:" + ex);
                 throw ex;
             }
             return port;

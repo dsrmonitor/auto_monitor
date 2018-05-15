@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
+using dsrUtil.constant;
 
 namespace dsrUtil
 {
@@ -30,7 +31,19 @@ public class Log
 
         logFileName = logPath + logName;
     }
-    public bool WriteLog(string Valor, byte level)
+    public bool writeExceptionLog(string valor)
+    {
+            return writeLog(valor, Constants.LOG_EXCEPTION);
+    }
+    public bool writeTraceLog(string valor)
+    {
+        return writeLog(valor, Constants.LOG_TRACE);
+    }
+    public bool writeDebugLog(string valor)
+    {
+        return writeLog(valor, Constants.LOG_DEBUG);
+    }
+        private bool writeLog(string Valor, byte level)
     {
 
         try

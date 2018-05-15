@@ -47,7 +47,7 @@ namespace Repository
             }
             catch(Exception ex)
             {
-                objLog.WriteLog("Erro ao conectar no banco de dados:"+ex.ToString(), Constants.LOG_EXCEPTION );
+                objLog.writeExceptionLog("Erro ao conectar no banco de dados:"+ex.ToString());
             }
             
 

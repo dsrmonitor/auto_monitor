@@ -65,7 +65,7 @@ namespace Repository
                 return (from e in session.Query<T>() select e).ToList();
             }
         }
-
+       
         public T loadFromId(int id)
         {
             using (ISession session = sessionFacrtoy.openSession())

@@ -21,6 +21,7 @@ namespace srv_receive_data
     {
         private Log objLog;
         private SerialPort modemPort;
+
         public srv_receive_data()
         {
             InitializeComponent();
@@ -30,10 +31,10 @@ namespace srv_receive_data
             //Cria o objeto de log
             objLog = new Log(init.IniReadInt("levelLog"), Constants.INIT_PATH);
             //Loga a inicializacao do servico
-            objLog.WriteLog("Initializing the Service ...", Constants.LOG_TRACE);
+            objLog.writeTraceLog("Initializing the Service ..."); 
 
-            //Buscando String de conexão
-            sessionFacrtoy.setConString(init.IniReadString("conString"));
+           //Buscando String de conexão
+           sessionFacrtoy.setConString(init.IniReadString("conString"));  
 
             //Conectando a porta serial
             modemPort = utilSerialPort.OpenPort(
@@ -45,8 +46,10 @@ namespace srv_receive_data
                 objLog);
 
             readDataThread thread01 = new readDataThread(modemPort, objLog);
+            sendDataThread threadSend = new sendDataThread(objLog);
 
             thread01.Call();
+            threadSend.Call();
         }
         private void setLogObjects()
         {
