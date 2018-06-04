@@ -180,5 +180,34 @@ namespace srv_receive_data.source
                 return (false);
             }
         }
+
+        public bool sendMsg(sms_queue_send message)
+        {
+            bool isSend = false;
+
+            try
+            {
+                string recievedData = ExecCommand(objSerialPort, "AT", 300);
+                recievedData = ExecCommand(objSerialPort, "AT+CMGF=1", 300);
+                String command = "AT+CMGS=\"" + message.recipient + "\"";
+                recievedData = ExecCommand(objSerialPort, command, 300);
+                command = message.message + char.ConvertFromUtf32(26) + "\r";
+                recievedData = ExecCommand(objSerialPort, command, 3000); //3 seconds
+                if (recievedData.EndsWith("\r\nOK\r\n"))
+                {
+                    isSend = true;
+                }
+                else if (recievedData.Contains("ERROR"))
+                {
+                    isSend = false;
+                }
+                return isSend;
+            }
+            catch (Exception ex)
+            {
+               objLog.writeExceptionLog(ex.Message);
+                return false;
+            }
+        }
     }
 }

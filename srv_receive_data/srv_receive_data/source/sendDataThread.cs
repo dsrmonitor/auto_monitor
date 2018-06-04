@@ -4,6 +4,7 @@ using Repository;
 using Repository.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,13 @@ namespace srv_receive_data.source
 {
     class sendDataThread
     {
-        private Log objLog;
-        public sendDataThread(Log log)
+        private Log objLog; 
+        private SMSMonitor objSmsMonitor;
+
+        public sendDataThread(SerialPort port, Log log)
         {
             objLog = log;
+            objSmsMonitor = new SMSMonitor(port, objLog);
 
         }
         public void Call()
@@ -37,6 +41,7 @@ namespace srv_receive_data.source
 
                 foreach (var msg in lista)
                 {
+                    objSmsMonitor.sendMsg(msg);
                     objLog.writeTraceLog("Mensagem a ser enviada:" + msg.message);
                     dao.delete(msg);
                 }                

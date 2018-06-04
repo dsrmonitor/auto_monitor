@@ -45,8 +45,10 @@ namespace srv_receive_data
                 init.IniReadInt("writeTimeout",300),
                 objLog);
 
+
+
             readDataThread thread01 = new readDataThread(modemPort, objLog);
-            sendDataThread threadSend = new sendDataThread(objLog);
+            sendDataThread threadSend = new sendDataThread(modemPort, objLog);
 
             thread01.Call();
             threadSend.Call();
