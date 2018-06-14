@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using Repository;
 using Repository.Entities;
 using dsrUtil;
+using utils;
 
 namespace srv_receive_data.source
 {
-    class SMSMonitor
+    public class SMSMonitor
     {
         private SerialPort objSerialPort;
         private Log objLog;
@@ -25,6 +26,7 @@ namespace srv_receive_data.source
             objSerialPort = serial;
             objLog = log;
         }
+        //Executa comandos na porta serial do moden
         private string ExecCommand(SerialPort port, string command, int responseTimeout)
         {
             try
@@ -45,7 +47,7 @@ namespace srv_receive_data.source
                 throw ex;
             }
         }
-
+        //Le respostas do moden
         public string ReadResponse(SerialPort port, int timeout)
         {
             DateTime timeTimeout = DateTime.Now.AddMilliseconds(timeout);
@@ -66,6 +68,7 @@ namespace srv_receive_data.source
             }
             return buffer;
         }
+        //Le e processa mensagens do moden
         public String readMessages()
         {
             try
@@ -80,11 +83,14 @@ namespace srv_receive_data.source
                     // Use message format "Text mode"
                     ExecCommand(objSerialPort, "AT+CMGF=1", 1000);
                     // Use character set "PCCP437"
-                    ExecCommand(objSerialPort, "AT+CSCS=\"PCCP437\"", 1000);
+                    ExecCommand(objSerialPort, "AT+CSCS=\"HEX\"", 1000);
                     // Select SIM storage
                     ExecCommand(objSerialPort, "AT+CPMS=\"SM\"", 1000);
                     //Read the messages
+                    input = "";
                     input = ExecCommand(objSerialPort, "AT+CMGL=\"ALL\"", 50000000);
+
+                    //input = SMSMonitor.HextoString(input);
 
                     if (input != "")
                     {
@@ -100,7 +106,8 @@ namespace srv_receive_data.source
 
                             sms_not_recognized sms = new sms_not_recognized();
                             sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
-                            sms.message = msg.message;
+                            string stmsg = Conversions.HextoString(msg.message);
+                            sms.message = stmsg;
                             sms.index = msg.index;
                             sms.sender = msg.sender;
                             sms.alphabet = msg.alphabet;
@@ -122,6 +129,7 @@ namespace srv_receive_data.source
             }
             return "";
         }
+        //Decodifica uma mensagem
         private List<SMSMessage> parseSMSMessage(string input)
         {
             List<SMSMessage> result = new List<SMSMessage>();
@@ -153,6 +161,7 @@ namespace srv_receive_data.source
             }
             return (result);
         }
+        //Apaga uma mensagem no moden, baseado no index
         private bool deleteMsg(int index)
         {
             string input = "";
@@ -180,7 +189,8 @@ namespace srv_receive_data.source
                 return (false);
             }
         }
-
+        
+        //Envia uma mensagem para o moden
         public bool sendMsg(sms_queue_send message)
         {
             bool isSend = false;
@@ -207,6 +217,20 @@ namespace srv_receive_data.source
             {
                objLog.writeExceptionLog(ex.Message);
                 return false;
+            }
+        }
+
+        //Busca dados equipamentso que precisam de atualização na posição e insere 
+        //no pool de mensagens a serem enviados. Posteriormente, verificar se esta é
+        //a melhor classe para este método
+        public static void loadEquipmentThatNeedsUpdate(Log objlog)
+        {
+            vehiclesRepository dao = new vehiclesRepository();
+            IList<vehicles> lista = dao.loadNeedPositionUpdate(20);
+            foreach (var veichle in lista)
+            {
+                objlog.writeTraceLog("Placa do veiculo:" +veichle.license+" ===================================");
+                sms_queue_send msg = new sms_queue_send();
             }
         }
     }

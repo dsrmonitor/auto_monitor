@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace srv_receive_data.source
 {
-    class sendDataThread
+    public class sendDataThread
     {
         private Log objLog; 
         private SMSMonitor objSmsMonitor;
@@ -36,6 +36,7 @@ namespace srv_receive_data.source
           
             while (true)
             {
+                //SMSMonitor.loadEquipmentThatNeedsUpdate(objLog);
                 sms_queue_sendRepository dao = new sms_queue_sendRepository();
                 IList<sms_queue_send> lista = dao.loadForStatus(true);
 

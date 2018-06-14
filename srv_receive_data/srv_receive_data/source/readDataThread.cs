@@ -10,7 +10,7 @@ using dsrUtil;
 
 namespace srv_receive_data.source
 {
-    class readDataThread
+    public class readDataThread
     {
         
         private Log objLog;

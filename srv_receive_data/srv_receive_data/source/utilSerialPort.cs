@@ -9,7 +9,7 @@ using dsrUtil;
 
 namespace srv_receive_data.source.util
 {
-    class utilSerialPort
+    public class utilSerialPort
     {
        public static SerialPort OpenPort(string p_strPortName,
             int p_uBaudRate, int p_uDataBits,
