@@ -8,14 +8,20 @@ namespace utils
 {
     public class Conversions
     {
-        public static string HextoString(string InputText)
+        public static string HextoString(string HexString)
         {
+            string stringValue = "";
+            for (int i = 0; i < HexString.Length / 4; i++)
+            {
 
-            byte[] bb = Enumerable.Range(0, InputText.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(InputText.Substring(x, 2), 16))
-                             .ToArray();
-            return System.Text.Encoding.ASCII.GetString(bb);
+                string hexChar = HexString.Substring(i * 4, 4);
+                int hexValue = Convert.ToInt32(hexChar, 16);
+                if (hexValue <= 127) { 
+                    stringValue += Char.ConvertFromUtf32(hexValue);
+                }
+            }
+            return stringValue;
         }
+
     }
 }

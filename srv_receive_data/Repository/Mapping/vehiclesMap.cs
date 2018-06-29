@@ -18,9 +18,9 @@ namespace Repository.Mapping
             Map(c => c.phone_number);
             Map(c => c.chassi_number);
             Map(c => c.description);
-            //Map(c => c.updated_at);
-            //Map(c => c.deleted_at);
-            //Map(c => c.last_update);
+            Map(c => c.updated_at);
+            Map(c => c.deleted_at);
+            Map(c => c.last_update);
             Table("vehicles");
         }
     }

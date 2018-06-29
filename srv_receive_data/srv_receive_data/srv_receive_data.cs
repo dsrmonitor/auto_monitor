@@ -38,7 +38,7 @@ namespace srv_receive_data
 
             //Conectando a porta serial
             modemPort = utilSerialPort.OpenPort(
-                init.IniReadString("comPort", "COM1"),
+                init.IniReadString("comPort", "COM4"),
                 init.IniReadInt("baudRate", 9600),
                 init.IniReadInt("dataBits", 8),
                 init.IniReadInt("readTimeout", 300),

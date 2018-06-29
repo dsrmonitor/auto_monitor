@@ -83,7 +83,7 @@ namespace srv_receive_data.source
                     // Use message format "Text mode"
                     ExecCommand(objSerialPort, "AT+CMGF=1", 1000);
                     // Use character set "PCCP437"
-                    ExecCommand(objSerialPort, "AT+CSCS=\"HEX\"", 1000);
+                    ExecCommand(objSerialPort, "AT+CSCS=\"PCCP437\"", 1000);//PCCP437
                     // Select SIM storage
                     ExecCommand(objSerialPort, "AT+CPMS=\"SM\"", 1000);
                     //Read the messages
@@ -201,7 +201,7 @@ namespace srv_receive_data.source
                 recievedData = ExecCommand(objSerialPort, "AT+CMGF=1", 300);
                 String command = "AT+CMGS=\"" + message.recipient + "\"";
                 recievedData = ExecCommand(objSerialPort, command, 300);
-                command = message.message + char.ConvertFromUtf32(26) + "\r";
+                command = message.message  +" \u001a" + "\r";
                 recievedData = ExecCommand(objSerialPort, command, 3000); //3 seconds
                 if (recievedData.EndsWith("\r\nOK\r\n"))
                 {
@@ -226,12 +226,25 @@ namespace srv_receive_data.source
         public static void loadEquipmentThatNeedsUpdate(Log objlog)
         {
             vehiclesRepository dao = new vehiclesRepository();
-            IList<vehicles> lista = dao.loadNeedPositionUpdate(20);
+            IList<vehicles> lista = dao.loadNeedPositionUpdate(20000);
+            sms_queue_sendRepository dao_sms = new sms_queue_sendRepository();
             foreach (var veichle in lista)
             {
                 objlog.writeTraceLog("Placa do veiculo:" +veichle.license+" ===================================");
                 sms_queue_send msg = new sms_queue_send();
+                msg.message = "#smslink#123456#";
+                msg.recipient = veichle.phone_number;
+                msg.status = true;
+                veichle.last_update = DateTime.Now;
+                dao.update(veichle);
+                dao_sms.insert(msg);
             }
+        }
+
+        public static string convertToUTF8(string str)
+        {
+            byte[] bytes = Encoding.Default.GetBytes(str);
+            return Encoding.UTF8.GetString(bytes);
         }
     }
 }

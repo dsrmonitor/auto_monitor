@@ -19,7 +19,7 @@ namespace Repository
                 {
                     DateTime limit = (DateTime.Now.AddSeconds(timeStamp * -1));
                     return session.Query<vehicles>()
-                                  .Where(p => (p.last_update < limit) || (p.last_update != null))
+                                  .Where(p => (p.last_update < limit) || (p.last_update == null))
                                   .ToList();
                 }
                 catch(Exception ex)

@@ -40,7 +40,7 @@ namespace Formulario_dbug
 
             //Conectando a porta serial
             modemPort = utilSerialPort.OpenPort(
-                init.IniReadString("comPort", "COM1"),
+                init.IniReadString("comPort", "COM4"),
                 init.IniReadInt("baudRate", 9600),
                 init.IniReadInt("dataBits", 8),
                 init.IniReadInt("readTimeout", 300),
@@ -48,10 +48,10 @@ namespace Formulario_dbug
                 objLog);
 
             thread01 = new readDataThread(modemPort, objLog);
-            threadSend = new sendDataThread(modemPort, objLog);
+            //threadSend = new sendDataThread(modemPort, objLog);
 
             thread01.Call();
-            threadSend.Call();
+            //threadSend.Call();
 
         }
     }
