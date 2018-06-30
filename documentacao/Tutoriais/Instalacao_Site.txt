@@ -1,0 +1,40 @@
+===========================
+||POSTGRES DATABASE      || 
+===========================
+-Instalar a versão 9.4 do pgAdmin/postgres
+
+-Para conectar o Spring Application ao banco de dados va ate a pasta resources(do projeto Projeto/src/main...)
+-Adicione as seguintes linhas ao application.properties
+
+		spring.datasource.url=jdbc:postgresql://localhost:5432/dsr_monitor          //indica a "URL" da base de dados
+		spring.jpa.hibernate.ddl-auto=update                                        //indica o tipo de acesso (com update ele so fara atualizaçoes se necessario, se usar create ele recria o bd)
+		spring.datasource.username=admin                                            //nome do usuario do bd             
+		spring.datasource.password=admin                                            //senha do usuario do bd
+		spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true       //n sei o que é mais tem que ter para conectar sem erros
+
+-caso voce não lembre seu usuario e senha. é possivel criar um pelo pgAdmin em LoginRoles (lembrar de ceder permissoes)
+
+===========================
+||ANGULAR CONFIGURATION  ||
+===========================
+
+Baixe a ultima versão do NODE.JS aqui: https://nodejs.org/en/download/
+
+Apos a instalação execute esse comando no terminal:
+
+	npm i --save @angular/cli@1.6.7
+
+Va ate o diretorio do projeto pelo terminal (dentro da pasta frontend) e rode:
+	(OBS: Caso tenha pegado do git direto talvez apenas um npm install ja faça todos esses comandos abaixo)
+
+	npm i --save @angular/material@5.2.5
+	npm i --save @angular/cdk@5.2.5
+	npm i --save bootstrap@4.1.1
+	npm i --save ng-block-ui
+	npm i --save ngx-mask
+	npm i --save ngx-toastr
+
+Instalar o Maven (E necessario ter instalado o Java 8). O maven é necessario para rodar o projeto via terminal. Instale com a ajuda desse tutorial:
+
+	https://www.youtube.com/watch?v=vUe4r9250c8
+
