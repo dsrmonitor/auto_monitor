@@ -12,6 +12,7 @@ using Repository;
 using Repository.Entities;
 using dsrUtil;
 using utils;
+using System.Data.SqlTypes;
 
 namespace srv_receive_data.source
 {
@@ -31,12 +32,15 @@ namespace srv_receive_data.source
         {
             try
             {
-
+                string input;
+                port.Open();
                 port.DiscardOutBuffer();
                 port.DiscardInBuffer();
                 port.Write(command + "\r");
 
-                string input = ReadResponse(port, responseTimeout);
+
+                input = ReadResponse(port, responseTimeout);
+                port.Close();
                 if ((input.Length == 0) || ((!input.EndsWith("\r\n> ")) && (!input.EndsWith("\r\nOK\r\n"))))
                     input = "";
                 return input;
@@ -44,7 +48,9 @@ namespace srv_receive_data.source
             }
             catch (Exception ex)
             {
+                port.Close();
                 throw ex;
+
             }
         }
         //Le respostas do moden
@@ -88,7 +94,7 @@ namespace srv_receive_data.source
                     ExecCommand(objSerialPort, "AT+CPMS=\"SM\"", 1000);
                     //Read the messages
                     input = "";
-                    input = ExecCommand(objSerialPort, "AT+CMGL=\"ALL\"", 50000000);
+                    input = ExecCommand(objSerialPort, "AT+CMGL=\"ALL\"", 0);
 
                     //input = SMSMonitor.HextoString(input);
 
@@ -106,7 +112,15 @@ namespace srv_receive_data.source
 
                             sms_not_recognized sms = new sms_not_recognized();
                             sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
-                            string stmsg = Conversions.HextoString(msg.message);
+                            string stmsg;
+                            //Se a string é um hexa
+                            if (Conversions.OnlyHexInString(msg.message))
+                            {
+                                stmsg = Conversions.HextoString(msg.message);
+                            }else
+                            {
+                                stmsg = msg.message;
+                            }
                             sms.message = stmsg;
                             sms.index = msg.index;
                             sms.sender = msg.sender;
@@ -135,8 +149,9 @@ namespace srv_receive_data.source
             List<SMSMessage> result = new List<SMSMessage>();
             try
             {
-
+                //"\r\n+CMGL: 1,\"REC READ\",\"5537998327006\",\"\",\"2018/06/30 14:50:46-12\"\r\n\nTeste002\r\n\r\nOK\r\n"
                 Regex r = new Regex(@"\+CMGL: (\d*),""(.+)"",""(.+)"",(.*),""(.+)""\r\n(.+)\r\n");
+                //Regex r = new Regex(@"\\n(.+)\\r");
                 Match m = r.Match(input);                
                 while (m.Success)
                 {
@@ -197,12 +212,12 @@ namespace srv_receive_data.source
 
             try
             {
-                string recievedData = ExecCommand(objSerialPort, "AT", 300);
-                recievedData = ExecCommand(objSerialPort, "AT+CMGF=1", 300);
+                string recievedData = ExecCommand(objSerialPort, "AT", 300000);
+                recievedData = ExecCommand(objSerialPort, "AT+CMGF=1", 300000);
                 String command = "AT+CMGS=\"" + message.recipient + "\"";
-                recievedData = ExecCommand(objSerialPort, command, 300);
+                recievedData = ExecCommand(objSerialPort, command, 300000);
                 command = message.message  +" \u001a" + "\r";
-                recievedData = ExecCommand(objSerialPort, command, 3000); //3 seconds
+                recievedData = ExecCommand(objSerialPort, command, 3000000); //3 seconds
                 if (recievedData.EndsWith("\r\nOK\r\n"))
                 {
                     isSend = true;
@@ -230,7 +245,6 @@ namespace srv_receive_data.source
             sms_queue_sendRepository dao_sms = new sms_queue_sendRepository();
             foreach (var veichle in lista)
             {
-                objlog.writeTraceLog("Placa do veiculo:" +veichle.license+" ===================================");
                 sms_queue_send msg = new sms_queue_send();
                 msg.message = "#smslink#123456#";
                 msg.recipient = veichle.phone_number;

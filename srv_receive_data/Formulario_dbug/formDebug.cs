@@ -24,6 +24,7 @@ namespace Formulario_dbug
 
         private readDataThread thread01;
         private sendDataThread threadSend;
+        private static readonly object serial_block = new object();
         public formDebug()
         {
             InitializeComponent();
@@ -47,11 +48,11 @@ namespace Formulario_dbug
                 init.IniReadInt("writeTimeout", 300),
                 objLog);
 
-            thread01 = new readDataThread(modemPort, objLog);
-            //threadSend = new sendDataThread(modemPort, objLog);
+            thread01 = new readDataThread(modemPort, objLog, serial_block);
+            threadSend = new sendDataThread(modemPort, objLog,serial_block);
 
             thread01.Call();
-            //threadSend.Call();
+            threadSend.Call();
 
         }
     }

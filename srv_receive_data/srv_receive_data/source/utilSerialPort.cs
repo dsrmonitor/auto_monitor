@@ -32,7 +32,7 @@ namespace srv_receive_data.source.util
                 port.Encoding = Encoding.GetEncoding("iso-8859-1");
                 //port.DataReceived += new SerialDataReceivedEventHandler
                 //        (port_DataReceived);
-                port.Open();
+                //port.Open();
                 port.DtrEnable = true;
                 port.RtsEnable = true;
             }

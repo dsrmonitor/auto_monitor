@@ -15,9 +15,11 @@ namespace srv_receive_data.source
     {
         private Log objLog; 
         private SMSMonitor objSmsMonitor;
+        private object serialBlock;
 
-        public sendDataThread(SerialPort port, Log log)
+        public sendDataThread(SerialPort port, Log log, object block)
         {
+            serialBlock = block;
             objLog = log;
             objSmsMonitor = new SMSMonitor(port, objLog);
 
@@ -36,16 +38,19 @@ namespace srv_receive_data.source
           
             while (true)
             {
-                SMSMonitor.loadEquipmentThatNeedsUpdate(objLog);
-                sms_queue_sendRepository dao = new sms_queue_sendRepository();
-                IList<sms_queue_send> lista = dao.loadForStatus(true);
-
-                foreach (var msg in lista)
+                lock (serialBlock)
                 {
-                    objSmsMonitor.sendMsg(msg);
-                    objLog.writeTraceLog("Mensagem a ser enviada:" + msg.message);
-                    dao.delete(msg);
-                }                
+                    SMSMonitor.loadEquipmentThatNeedsUpdate(objLog);
+                    sms_queue_sendRepository dao = new sms_queue_sendRepository();
+                    IList<sms_queue_send> lista = dao.loadForStatus(true);
+
+                    foreach (var msg in lista)
+                    {
+                        objSmsMonitor.sendMsg(msg);
+                        objLog.writeTraceLog("Mensagem a ser enviada:" + msg.message);
+                        dao.delete(msg);
+                    }
+                }
                 System.Threading.Thread.Sleep(5000);                
             }
 

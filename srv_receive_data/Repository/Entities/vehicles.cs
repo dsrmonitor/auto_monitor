@@ -15,7 +15,7 @@ namespace Repository.Entities
         public virtual string chassi_number { get; set; }
         public virtual string description { get; set; }
         public virtual DateTime updated_at { get; set; }
-        public virtual DateTime deleted_at { get; set; }
+        public virtual DateTime? deleted_at { get; set; }
         public virtual DateTime last_update { get; set; }
     }
 }

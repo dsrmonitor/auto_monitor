@@ -21,7 +21,7 @@ namespace srv_receive_data
     {
         private Log objLog;
         private SerialPort modemPort;
-
+        private static readonly object serial_block = new object();
         public srv_receive_data()
         {
             InitializeComponent();
@@ -47,8 +47,8 @@ namespace srv_receive_data
 
 
 
-            readDataThread thread01 = new readDataThread(modemPort, objLog);
-            sendDataThread threadSend = new sendDataThread(modemPort, objLog);
+            readDataThread thread01 = new readDataThread(modemPort, objLog, serial_block);
+            sendDataThread threadSend = new sendDataThread(modemPort, objLog, serial_block);
 
             thread01.Call();
             threadSend.Call();
