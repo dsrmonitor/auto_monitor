@@ -1,0 +1,48 @@
+<co-menu></co-menu>
+<div [ngClass]="open ? opened : closed">
+  <div class="row menu-area">
+    <mat-icon class="menu-icon" (click)="changeOpt()"	>reorder</mat-icon>
+  </div>
+
+  <div class="col-md-12 data-area">
+    <div class="info-area" >
+      <h2>Veiculos</h2>
+      <div class="row">
+        <div class="input-group" style="width: 90%; margin-left: 15px; margin-bottom: 10px;">
+          <input class="form-control" placeholder="Buscar..." name="search" id="search" #search>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="goSearch(search.value)">
+              <mat-icon style="vertical-align: middle;">search</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="height: 100%;">
+      <div class="teste2">
+        <table class="table tabela">
+          <thead>
+          <tr style="background-color: #374046; color:white;">
+            <th scope="col">Nome</th>
+            <th scope="col" class="glyphicon-center-3" style="text-align: center;">Nº Chassi</th>
+            <th scope="col" class="glyphicon-center-3" style="text-align: center;" >Telefone</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vehicle of vehicles; let i = index" (click)="setLinhaSelecionada(i)" [class.active]="i == linhaSelecionada">
+            <td scope="row">{{vehicle.name}}</td>
+            <td class="glyphicon-center-3" style="text-align: center;">{{vehicle.chassi_number}}</td>
+            <td class="glyphicon-center-3" style="text-align: center;">{{vehicle.phone_number}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-lg btn-outline-primary buttons" (click)="goNew()"><mat-icon>add</mat-icon></button><br>
+        <button class="btn btn-lg btn-outline-dark buttons" [disabled]="(linhaSelecionada<0)" (click)="goView()"><mat-icon>visibility</mat-icon></button><br>
+        <button class="btn btn-lg btn-outline-success buttons" [disabled]="(linhaSelecionada<0)" (click)="goEdit()"><mat-icon>create</mat-icon></button><br>
+        <button class="btn btn-lg btn-outline-danger buttons"  [disabled]="(linhaSelecionada<0)" (click)="goDelete()"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>

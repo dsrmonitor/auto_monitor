@@ -1,0 +1,25 @@
+<div class={{cssType}}>
+  <div class="profile-title">
+    <div class="profile-user">
+      <img src="http://www.rafacademy.com/wp-content/uploads/2017/03/user-default.png" class="img-responsive" alt="">
+    </div>
+    <div class="profile-username">
+      {{user.tx_nome_user}}
+    </div>
+    <div class="profile-type">
+      Secretario
+    </div>
+  </div>
+  <div class="options">
+    <ul>
+      <li class="mouse-hover" (click)="goHome()" >Home</li>
+      <li class="mouse-hover" (click)="goCarros()" >Veiculos</li>
+    </ul>
+  </div>
+
+  <div class="logout">
+    <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-elements/700/012_power-512.png" alt="" class="logout-img" width="40px" (click)="logout()" >
+  </div>
+</div>
+
+

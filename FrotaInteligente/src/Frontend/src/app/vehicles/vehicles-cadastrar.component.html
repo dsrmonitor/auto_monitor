@@ -1,0 +1,69 @@
+<co-menu></co-menu>
+<div [ngClass]="open ? opened : closed">
+  <div class="row menu-area">
+    <mat-icon class="menu-icon" (click)="changeOpt()"	>reorder</mat-icon>
+  </div>
+  <div class="col-md-12 data-area">
+    <h2 style="text-align: center;">{{title}} Veiculo</h2>
+    <div class="row data">
+      <div class="col-md-12">
+        <div class="profile-data">
+          <form  #editForm="ngForm">
+            <div class="row">
+              <div class="col-md-6" style="padding-bottom: 10px;">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" disabled type="button">
+                      <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
+                    </button>
+                  </div>
+                  <input class="form-control" [disabled]="disabledEdit" name="name" #name = "ngModel" [(ngModel)]="vehicle.name" placeholder="Digite o nome..." required>
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-bottom: 10px;">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" disabled type="button">
+                      <mat-icon style="vertical-align: middle;">call</mat-icon>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="phone_number" #phone_number = "ngModel" [(ngModel)]="vehicle.phone_number"  mask="(99) 9999-9999" placeholder="Telefone..." required >
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-bottom: 10px;">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" disabled type="button">
+                      <mat-icon style="vertical-align: middle;">account_box</mat-icon>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="chassi_number" #chassi_number = "ngModel" [(ngModel)]="vehicle.chassi_number"  placeholder="Digite o Chassi..." required>
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-bottom: 10px;">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" disabled type="button">
+                      <mat-icon style="vertical-align: middle;">account_box</mat-icon>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="license" #license = "ngModel" [(ngModel)]="vehicle.license"  placeholder="Digite a licensa..." required>
+                </div>
+              </div>
+              <div class="col-md-12" style="padding-bottom: 10px;">
+                  <label for="description">Descrição:</label>
+                  <textarea class="form-control" name="description" #description = "ngModel" [(ngModel)]="vehicle.description" [disabled]="disabledEdit" rows="5" id="description"></textarea>
+              </div>
+              <div class="col-md-12" style="margin-top: 15px;">
+                <button *ngIf="!disabledEdit" type="button" class="btn btn-outline-danger"  (click)="goBack()">Cancelar</button>
+                <button *ngIf="disabledEdit" type="button" class="btn btn-outline-danger"  (click)="goBack()">Voltar</button>
+                <button *ngIf="!disabledEdit && type === 1" type="button" class="btn btn-outline-success align-bottom float-right" (click)="goSave(editForm)">Salvar</button>
+                <button *ngIf="!disabledEdit && type === 3" type="button" class="btn btn-outline-success align-bottom float-right" (click)="goSave(editForm)">Atualizar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

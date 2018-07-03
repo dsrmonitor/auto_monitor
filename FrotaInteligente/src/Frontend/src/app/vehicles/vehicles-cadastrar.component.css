@@ -1,0 +1,62 @@
+.home-background-open{
+  transform: translateX(250px);
+  padding: 30px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #eee;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.home-background-closed{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #eee;
+  padding: 30px;
+  margin: 0;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.menu-icon {
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.menu-area{
+  height: 8%;
+  font-size: 36px;
+  display:block;
+  vertical-align: middle;
+  margin:0;
+}
+
+.data-area{
+  padding-top: 10px;
+  background: #d8d6d7;
+  height: 92%;
+  overflow-x: hidden;
+  overflow-y:auto;
+}
+
+.data{
+  height: 90%;
+}
+
+.profile-data{
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.btn-salvar{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  margin-right: 15px;
+}
