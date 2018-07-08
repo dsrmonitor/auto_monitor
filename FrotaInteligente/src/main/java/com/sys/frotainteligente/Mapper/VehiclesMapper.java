@@ -18,12 +18,24 @@ public class VehiclesMapper {
         vehiclesDTO.setName(vehicles.getName());
         vehiclesDTO.setLicense(vehicles.getLicense());
         vehiclesDTO.setPhone_number(vehicles.getPhone_number());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         if(vehicles.getUpdated_at() != null){
             vehiclesDTO.setUpdated_at(sdf.format(vehicles.getUpdated_at()));
         }
         if(vehicles.getDeleted_at() != null) {
             vehiclesDTO.setDeleted_at(sdf.format(vehicles.getDeleted_at()));
+        }
+		if(vehicles.getLast_update() != null) {
+            vehiclesDTO.setLast_update(sdf.format(vehicles.getLast_update()));
+        }
+		if(vehicles.getLast_west_coord() != null) {
+            vehiclesDTO.setLast_west_coord(vehicles.getLast_west_coord());
+        }
+		if(vehicles.getLast_south_coord() != null) {
+            vehiclesDTO.setLast_south_coord(vehicles.getLast_south_coord());
+        }
+		if(vehicles.getLast_speed_info() != null) {
+            vehiclesDTO.setLast_speed_info(vehicles.getLast_speed_info());
         }
         return vehiclesDTO;
     }
