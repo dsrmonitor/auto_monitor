@@ -121,15 +121,18 @@ namespace srv_receive_data.source
                             {
                                 stmsg = msg.message;
                             }
+                            SMSMonitor.verifyIsPositionMsg(stmsg);
+
                             sms.message = stmsg;
                             sms.index = msg.index;
                             sms.sender = msg.sender;
                             sms.alphabet = msg.alphabet;
+                            sms.inserted_at = DateTime.Now;
                             dao.insert(sms);
 
                             deleteMsg(msg.index);    
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -143,9 +146,17 @@ namespace srv_receive_data.source
             }
             return "";
         }
+        private static bool verifyIsPositionMsg(string input)
+        {
+            Regex r = new Regex(@"q=S\d*.\d*"",");
+            //Regex r = new Regex(@"\\n(.+)\\r");
+            Match m = r.Match(input);
+            return m.Success;
+        }
         //Decodifica uma mensagem
         private List<SMSMessage> parseSMSMessage(string input)
         {
+
             List<SMSMessage> result = new List<SMSMessage>();
             try
             {
