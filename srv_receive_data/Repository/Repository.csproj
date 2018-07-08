@@ -64,10 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\log_vehicle_position.cs" />
     <Compile Include="Entities\sms_queue_send.cs" />
     <Compile Include="Entities\vehicles.cs" />
     <Compile Include="IdsrMonitorDAO.cs" />
     <Compile Include="Entities\sms_not_recognized.cs" />
+    <Compile Include="log_vehicle_positionRepository.cs" />
+    <Compile Include="Mapping\log_vehicle_positionMap.cs" />
     <Compile Include="Mapping\sms_not_recognizedMap.cs" />
     <Compile Include="Mapping\sms_queue_sendMap.cs" />
     <Compile Include="Mapping\vehiclesMap.cs" />
