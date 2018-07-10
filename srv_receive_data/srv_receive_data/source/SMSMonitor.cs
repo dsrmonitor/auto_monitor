@@ -96,6 +96,10 @@ namespace srv_receive_data.source
             if (vPos != null && vehicle != null)
             {
                 vPos.vehicle_id = vehicle.id;
+                vehicle.last_west_coord = vPos.west;
+                vehicle.last_south_coord = vPos.south;
+                vehicle.last_speed_info = vPos.speed;
+                vDao.update(vehicle);
                 log_vehicle_positionRepository lvpDao = new log_vehicle_positionRepository();
                 lvpDao.insert(vPos);
             }

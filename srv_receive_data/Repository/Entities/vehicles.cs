@@ -17,5 +17,8 @@ namespace Repository.Entities
         public virtual DateTime updated_at { get; set; }
         public virtual DateTime? deleted_at { get; set; }
         public virtual DateTime last_update { get; set; }
+        public virtual string last_west_coord { get; set; }
+        public virtual string last_south_coord { get; set; }
+        public virtual float last_speed_info { get; set; }
     }
 }

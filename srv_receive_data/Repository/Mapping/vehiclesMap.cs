@@ -21,6 +21,9 @@ namespace Repository.Mapping
             Map(c => c.updated_at);
             Map(c => c.deleted_at);
             Map(c => c.last_update);
+            Map(c => c.last_west_coord);
+            Map(c => c.last_south_coord);
+            Map(c => c.last_speed_info);
             Table("vehicles");
         }
     }
