@@ -24,7 +24,7 @@ export class VehiclesCadastrarComponent implements OnInit {
   title: string;
 
   constructor(private vehiclesService: VehiclesService, private toastr: ToastrService, private router: Router, private activateRoute:ActivatedRoute) {
-
+      this.vehicle.phone_number = '';
   }
 
   ngOnInit() {
@@ -75,13 +75,13 @@ export class VehiclesCadastrarComponent implements OnInit {
         this.vehiclesService.create(this.vehicle).subscribe(vehicle => {
           if (vehicle.name !== null) {
             if(vehicle.id === -1){
-              this.toastr.error("Ja existe um automovel com estes dados","Erro!");
+              this.toastr.error("Ja existe um veiculo com estes dados","Erro!");
             }else {
               this.toastr.success("Veiculo cadastrado", "Sucesso!");
               this.goBack();
             }
           }else{
-            this.toastr.error("Erro ao cadastrar aluno","Erro!");
+            this.toastr.error("Erro ao cadastrar veiculo","Erro!");
           }
         });
     }else{

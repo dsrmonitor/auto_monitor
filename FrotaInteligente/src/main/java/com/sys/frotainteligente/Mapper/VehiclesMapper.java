@@ -18,7 +18,7 @@ public class VehiclesMapper {
         vehiclesDTO.setName(vehicles.getName());
         vehiclesDTO.setLicense(vehicles.getLicense());
         vehiclesDTO.setPhone_number(vehicles.getPhone_number());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         if(vehicles.getUpdated_at() != null){
             vehiclesDTO.setUpdated_at(sdf.format(vehicles.getUpdated_at()));
         }

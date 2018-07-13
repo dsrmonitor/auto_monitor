@@ -3,7 +3,7 @@ package com.sys.frotainteligente.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "VEHICLES")
@@ -35,9 +35,11 @@ public class Vehicles {
     private String description;
 
     @Column( name = "UPDATED_AT")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updated_at;
 
     @Column( name = "DELETED_AT")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date deleted_at;
 
     public Vehicles(@Size(max = 8) String license, @Size(max = 30) String name, @Size(max = 30) String phone_number, @Size(max = 30) String chassi_number, @Size(max = 200) String description, Date updated_at, Date deleted_at) {

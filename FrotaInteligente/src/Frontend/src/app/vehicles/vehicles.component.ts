@@ -61,7 +61,7 @@ export class VehiclesComponent implements OnInit {
     this.blockUI.start("Carregando dados...");
     this.vehiclesService.delete(this.vehicles[this.linhaSelecionada].id).subscribe(id => {
       this.linhaSelecionada= -1;
-      this.toastr.success("Aluno deletado","Sucesso!");
+      this.toastr.success("Veiculo deletado","Sucesso!");
       this.getVehicles()
     },error => {
       this.toastr.error("Erro ao excluir","Erro!");

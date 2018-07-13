@@ -17,7 +17,7 @@
                       <mat-icon style="vertical-align: middle;">account_circle</mat-icon>
                     </button>
                   </div>
-                  <input class="form-control" [disabled]="disabledEdit" name="name" #name = "ngModel" [(ngModel)]="vehicle.name" placeholder="Digite o nome..." required>
+                  <input class="form-control" [disabled]="disabledEdit" name="name" #name = "ngModel" [(ngModel)]="vehicle.name" placeholder="Digite o nome..." >
                 </div>
               </div>
               <div class="col-md-6" style="padding-bottom: 10px;">
@@ -27,7 +27,8 @@
                       <mat-icon style="vertical-align: middle;">call</mat-icon>
                     </button>
                   </div>
-                  <input type="text" class="form-control" [disabled]="disabledEdit" name="phone_number" #phone_number = "ngModel" [(ngModel)]="vehicle.phone_number"  mask="(99) 9999-9999" placeholder="Telefone..." required >
+                  <input *ngIf="vehicle.phone_number.length < 13" type="text" class="form-control" [disabled]="disabledEdit" name="phone_number" #phone_number = "ngModel" [(ngModel)]="vehicle.phone_number"  mask="00 (00) 0000-00009" placeholder="Telefone..." required >
+                  <input *ngIf="vehicle.phone_number.length === 13" type="text" class="form-control" [disabled]="disabledEdit" name="phone_number" #phone_number = "ngModel" [(ngModel)]="vehicle.phone_number"  mask="00 (00) 0 0000-0000" placeholder="Telefone..." required >
                 </div>
               </div>
               <div class="col-md-6" style="padding-bottom: 10px;">
@@ -37,7 +38,7 @@
                       <mat-icon style="vertical-align: middle;">account_box</mat-icon>
                     </button>
                   </div>
-                  <input type="text" class="form-control" [disabled]="disabledEdit" name="chassi_number" #chassi_number = "ngModel" [(ngModel)]="vehicle.chassi_number"  placeholder="Digite o Chassi..." required>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="chassi_number" #chassi_number = "ngModel" [(ngModel)]="vehicle.chassi_number"  placeholder="Digite o Chassi..." >
                 </div>
               </div>
               <div class="col-md-6" style="padding-bottom: 10px;">
@@ -47,7 +48,7 @@
                       <mat-icon style="vertical-align: middle;">account_box</mat-icon>
                     </button>
                   </div>
-                  <input type="text" class="form-control" [disabled]="disabledEdit" name="license" #license = "ngModel" [(ngModel)]="vehicle.license"  placeholder="Digite a licensa..." required>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="license" #license = "ngModel" maxlength="8" [(ngModel)]="vehicle.license"  placeholder="Digite a licensa..." >
                 </div>
               </div>
               <div class="col-md-12" style="padding-bottom: 10px;">

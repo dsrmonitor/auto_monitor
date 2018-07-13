@@ -19,12 +19,14 @@ public class UserResource {
 
     @GetMapping("/get-user-id/{username}/{password}")
     public String getUser(@PathVariable String username, @PathVariable String password) {
+        System.out.println("TEM AQUI");
         Long result =  userRepository.getUserId(username,password);
         return gson.toJson(result);
     }
 
     @GetMapping("get-user-by-id/{id}")
     public String getUserById(@PathVariable Long id){
+
         User result = userRepository.getOne(id);
         return gson.toJson(UserMapper.EntityToDTO(result));
     }
