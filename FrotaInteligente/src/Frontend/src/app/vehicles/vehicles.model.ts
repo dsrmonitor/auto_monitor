@@ -7,6 +7,10 @@ export class Vehicle{
   public description?:string;
   public updated_at?: string;
   public deleted_at?: string;
+  public last_update?: string;
+  public last_west_coord?: string;
+  public last_south_coord?: string;
+  public last_speed_info?: string;
 
   constructor(){}
 }

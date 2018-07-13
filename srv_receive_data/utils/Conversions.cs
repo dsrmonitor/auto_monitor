@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace utils
@@ -26,6 +27,16 @@ namespace utils
         {
             // For C-style hex notation (0xFF) you can use @"\A\b(0[xX])?[0-9a-fA-F]+\b\Z"
             return System.Text.RegularExpressions.Regex.IsMatch(test, @"\A\b[0-9a-fA-F]+\b\Z");
+        }
+        public static string phoneNumberWithoutCountryCode(string input)
+        {
+            Regex r = new Regex(@"(?:\+)?(?:55)?(\d{10}\d?)");
+            Match m = r.Match(input);
+            if (m.Success)
+            {
+                return m.Groups[1].Value;
+            }
+            return "";
         }
 
     }

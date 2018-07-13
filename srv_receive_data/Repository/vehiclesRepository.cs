@@ -28,5 +28,20 @@ namespace Repository
                 }
             }
         }
+        public vehicles loadVehicleByPhone(string value)
+        {
+            using (ISession session = sessionFacrtoy.openSession())
+            {
+                try
+                {
+                    return session.Query<vehicles>()
+                                  .Where(p => p.phone_number.Contains(value)).SingleOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

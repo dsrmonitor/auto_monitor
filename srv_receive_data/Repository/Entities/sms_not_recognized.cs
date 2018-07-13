@@ -14,5 +14,6 @@ namespace Repository.Entities
         public virtual String status { get; set; }
         public virtual String sender { get; set; }
         public virtual String alphabet { get; set; }
+        public virtual DateTime inserted_at { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Repository.Mapping
             Map(c => c.index);
             Map(c => c.sender);
             Map(c => c.alphabet);
+            Map(c => c.inserted_at);
             Table("sms_not_recognized");
         }        
     }

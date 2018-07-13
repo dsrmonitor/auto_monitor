@@ -33,8 +33,16 @@ Va ate o diretorio do projeto pelo terminal (dentro da pasta frontend) e rode:
 	npm i --save ng-block-ui
 	npm i --save ngx-mask
 	npm i --save ngx-toastr
+	
+	mvn clean install -U
 
 Instalar o Maven (E necessario ter instalado o Java 8). O maven é necessario para rodar o projeto via terminal. Instale com a ajuda desse tutorial:
 
 	https://www.youtube.com/watch?v=vUe4r9250c8
+	
+//Para compilar vá até a pasta do projeto usando o prompt C:\git\auto_monitor\FrotaInteligente e execute o comando
+mvn package
+
+//Executar
+C:\Windows\system32>java -jar c:\git\auto_monitor\FrotaInteligente\target\frotainteligente-0.0.1-SNAPSHOT.jars
 

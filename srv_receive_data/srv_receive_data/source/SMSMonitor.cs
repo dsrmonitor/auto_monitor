@@ -74,6 +74,48 @@ namespace srv_receive_data.source
             }
             return buffer;
         }
+        //Verifica e salva mensagens
+        private void saveMessage(SMSMessage msg)
+        {
+            string stmsg;
+            //Se a string é um hexa
+            if (Conversions.OnlyHexInString(msg.message))
+            {
+                stmsg = Conversions.HextoString(msg.message);
+            }
+            else
+            {
+                stmsg = msg.message;
+            }
+            log_vehicle_position vPos = SMSMonitor.verifyIsPositionMsg(stmsg);
+            vehiclesRepository vDao = new vehiclesRepository();
+            //Pega o número do telefone sem o identificador do país
+            string stSimplePhone = Conversions.phoneNumberWithoutCountryCode(msg.sender);
+
+            vehicles vehicle = vDao.loadVehicleByPhone(stSimplePhone);
+            if (vPos != null && vehicle != null)
+            {
+                vPos.vehicle_id = vehicle.id;
+                vehicle.last_west_coord = vPos.west;
+                vehicle.last_south_coord = vPos.south;
+                vehicle.last_speed_info = vPos.speed;
+                vDao.update(vehicle);
+                log_vehicle_positionRepository lvpDao = new log_vehicle_positionRepository();
+                lvpDao.insert(vPos);
+            }
+            else
+            {
+                sms_not_recognized sms = new sms_not_recognized();
+                sms_not_recognizedRepository nrDao = new sms_not_recognizedRepository();
+                sms.message = stmsg;
+                sms.index = msg.index;
+                sms.sender = msg.sender;
+                sms.alphabet = msg.alphabet;
+                sms.inserted_at = DateTime.Now;
+                nrDao.insert(sms);
+            }
+        }
+
         //Le e processa mensagens do moden
         public String readMessages()
         {
@@ -110,26 +152,10 @@ namespace srv_receive_data.source
                             objLog.writeTraceLog("Índice:" + msg.index);
                             objLog.writeTraceLog("===============================");
 
-                            sms_not_recognized sms = new sms_not_recognized();
-                            sms_not_recognizedRepository dao = new sms_not_recognizedRepository();
-                            string stmsg;
-                            //Se a string é um hexa
-                            if (Conversions.OnlyHexInString(msg.message))
-                            {
-                                stmsg = Conversions.HextoString(msg.message);
-                            }else
-                            {
-                                stmsg = msg.message;
-                            }
-                            sms.message = stmsg;
-                            sms.index = msg.index;
-                            sms.sender = msg.sender;
-                            sms.alphabet = msg.alphabet;
-                            dao.insert(sms);
-
+                            saveMessage(msg);
                             deleteMsg(msg.index);    
                         }
-                    }
+                    } 
                 }
                 else
                 {
@@ -143,9 +169,26 @@ namespace srv_receive_data.source
             }
             return "";
         }
+        public static log_vehicle_position verifyIsPositionMsg(string input)
+        {
+            Regex r = new Regex(@"(?:\?q=S)(\d+\.\d*)(?:,W)(\d+\.\d*)(?:.*Speed:)(\d+\.\d*)");            
+            Match m = r.Match(input);
+
+            if (m.Success) {
+                log_vehicle_position result = new log_vehicle_position();
+                result.south = m.Groups[1].Value;
+                result.west = m.Groups[2].Value;
+                result.speed = float.Parse(m.Groups[3].Value);
+                result.timestamp = DateTime.Now;
+
+                return (result);
+            }
+            return null;
+        }
         //Decodifica uma mensagem
         private List<SMSMessage> parseSMSMessage(string input)
         {
+
             List<SMSMessage> result = new List<SMSMessage>();
             try
             {
@@ -241,7 +284,7 @@ namespace srv_receive_data.source
         public static void loadEquipmentThatNeedsUpdate(Log objlog)
         {
             vehiclesRepository dao = new vehiclesRepository();
-            IList<vehicles> lista = dao.loadNeedPositionUpdate(20000);
+            IList<vehicles> lista = dao.loadNeedPositionUpdate(2000000000);
             sms_queue_sendRepository dao_sms = new sms_queue_sendRepository();
             foreach (var veichle in lista)
             {
