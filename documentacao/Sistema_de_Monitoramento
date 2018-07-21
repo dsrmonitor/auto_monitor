@@ -1,0 +1,47 @@
+Levantamento, viabilidade sistema de rastreamento:
+
+Possível modelo de rastreador:
+/rastreador-tk303c
+/rastreador gt06(aparentemente é a melhor opção)
+
+Site do cara que fraga de rastreadores
+http://clebsonxenon.blogspot.com.br/2014/06/comandos-do-rastreador-gt06.html?m=1
+
+GSMCOM: Biblioteca para leitura de dados sms
+
+Modelo moden
+Daruma min 210
+
+//Site que contem um exemplo de configuração para receber posição do rastreador via internet, no caso eu teria 
+//que descobrir como coletar este dado
+https://www.mobiltracker.com.br/padrao-gt06
+
+
+//Manual do rastreador em portugues
+http://www.ekstech.com.br/wp-content/uploads/2018/01/GT06_Portugues_user_manual.pdf
+
+
+//Enviando mensagem via sms com c#
+http://www.andrealveslima.com.br/blog/index.php/2017/10/18/enviando-sms-com-c-e-vb-net/
+https://www.codeproject.com/Articles/38705/Send-and-Read-SMS-through-a-GSM-Modem-using-AT-Com
+
+//Forum com duvida sobre planos de celular para rastreadores
+https://www.htforum.com/forum/threads/rastreador-veicular-ajuda.239874/
+
+Frameworks para desenvolvimento web
+bootstra
+
+//Site que permite controle de frota e adm publica
+Urbem
+
+//Conta de email
+dscontrol.geral@gmail.com
+Dscontrol2018
+
+
+Número do pedido, modem 3g
+0280335
+
+
+//Senha Banco de Dados
+dsrdb
