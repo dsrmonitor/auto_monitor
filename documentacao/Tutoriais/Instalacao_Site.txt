@@ -44,5 +44,28 @@ Instalar o Maven (E necessario ter instalado o Java 8). O maven é necessario pa
 mvn package
 
 //Executar
-C:\Windows\system32>java -jar c:\git\auto_monitor\FrotaInteligente\target\frotainteligente-0.0.1-SNAPSHOT.jars
+java -jar c:\git\auto_monitor\FrotaInteligente\target\frotainteligente-0.0.1-SNAPSHOT.jars
+
+//Em outro prompt (entrar na pasta Frontend)
+npm start
+
+
+Perguntas pro lucas:
+1- O comando np serve não funcionou, tive que usar o npm start que já inicia o serve, mas sempre sem o ip, vc tem idéia do que pode ser?
+
+2- Inseri um usuario, qdo pressiono o botão Entrar, n acontece nada, o que pode ser?
+
+3- A logo não está aparecendo na tela de login!
+
+4- Inserir wait screen para login e operações básicas da tela
+
+
+//Arquivos para mudar o ip em caso de testes
+FrotaInteligente/src/Frontend/package.json
+FrotaInteligente/src/Frontend/src/app/home/home.service.ts
+FrotaInteligente/src/Frontend/src/app/login/login.service.ts
+FrotaInteligente/src/Frontend/src/app/vehicles/vehicles.service.ts
+FrotaInteligente/src/main/java/com/sys/frotainteligente/Resource/UserResource.java
+FrotaInteligente/src/main/java/com/sys/frotainteligente/Resource/VehiclesResource.java
+FrotaInteligente/src/main/resources/application.properties
 
