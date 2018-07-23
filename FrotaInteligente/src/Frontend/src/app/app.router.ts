@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import {HomeComponent} from "./home/home.component";
 import {VehiclesComponent} from "./vehicles/vehicles.component";
 import {VehiclesCadastrarComponent} from "./vehicles/vehicles-cadastrar.component";
+import {LocalizationComponent} from "./localization/localization.component";
 
 const appRoutes: Routes = [
   {path:'', component: LoginComponent},
   {path:'home/:id', component: HomeComponent},
   {path:'carros/:id', component: VehiclesComponent},
-  {path:'carros-c/:id/:type/:idv', component: VehiclesCadastrarComponent}
+  {path:'carros-c/:id/:type/:idv', component: VehiclesCadastrarComponent},
+  {path:'localizacao', component: LocalizationComponent}
 ];
 
 @NgModule({

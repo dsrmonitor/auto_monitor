@@ -18,6 +18,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehiclesCadastrarComponent} from './vehicles/vehicles-cadastrar.component';
 import { BlockUIModule } from 'ng-block-ui';
 import {VehiclesService} from "./vehicles/vehicles.service";
+import { LocalizationComponent } from './localization/localization.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {VehiclesService} from "./vehicles/vehicles.service";
     HomeComponent,
     MenuComponent,
     VehiclesComponent,
-    VehiclesCadastrarComponent
+    VehiclesCadastrarComponent,
+    LocalizationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import {VehiclesService} from "./vehicles/vehicles.service";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    AgmCoreModule.forRoot()
   ],
   providers: [LoginService,HomeService, VehiclesService],
   bootstrap: [AppComponent]

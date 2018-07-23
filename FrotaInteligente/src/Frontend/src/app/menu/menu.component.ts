@@ -34,4 +34,8 @@ export class MenuComponent implements OnInit {
   goCarros(){
     this.router.navigate(['carros/'+this.user.id_user]);
   }
+
+  goLocalization(){
+    this.router.navigate(['localizacao']);
+  }
 }
