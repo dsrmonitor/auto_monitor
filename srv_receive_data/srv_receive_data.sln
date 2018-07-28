@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dsrUtil", "utils\dsrUtil.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formulario_dbug", "Formulario_dbug\Formulario_dbug.csproj", "{5B3D7A62-E8E9-44C3-B024-DA04162B88E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPSocketTest", "TCPSocketTest\TCPSocketTest.csproj", "{B9993D0B-B67C-42CB-9147-8EFABA93CD2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5B3D7A62-E8E9-44C3-B024-DA04162B88E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3D7A62-E8E9-44C3-B024-DA04162B88E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3D7A62-E8E9-44C3-B024-DA04162B88E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9993D0B-B67C-42CB-9147-8EFABA93CD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9993D0B-B67C-42CB-9147-8EFABA93CD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9993D0B-B67C-42CB-9147-8EFABA93CD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9993D0B-B67C-42CB-9147-8EFABA93CD2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -69,3 +69,6 @@ FrotaInteligente/src/main/java/com/sys/frotainteligente/Resource/UserResource.ja
 FrotaInteligente/src/main/java/com/sys/frotainteligente/Resource/VehiclesResource.java
 FrotaInteligente/src/main/resources/application.properties
 
+
+//Usar a chave abaixo para acesso ao google maps
+AIzaSyDWbkfyG-0wuE8O0oPgIO4wWwbaUc9CFLk

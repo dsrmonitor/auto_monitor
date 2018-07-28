@@ -16,6 +16,9 @@ namespace dsrUtil.constant
         //Diretório para ini
         public const string INIT_PATH = "C:\\nsrMonitor";
         public const string INIT_NAME = "nsrMonitor.ini";
+
+        //Constantes relacionadas ao protocolo de comunicação do GT06
+        public const UInt16 GT06_LOGIN_MSG = 1;
     }
 
 }
