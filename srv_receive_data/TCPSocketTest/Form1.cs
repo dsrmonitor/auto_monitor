@@ -14,6 +14,7 @@ using dsrUtil.constant;
 using dsrUtil;
 using dsrUtil.GT06Protocol;
 using dsrUtil.Serialization;
+using CRC;
 
 namespace TCPSocketTest
 {
@@ -43,13 +44,16 @@ namespace TCPSocketTest
                 pkt.infoSerialNumber = BitConverter.ToUInt16(bytes, 12);
                 pkt.errorCheck = BitConverter.ToUInt16(bytes, 14);
                 pkt.stopBit = BitConverter.ToUInt16(bytes, 16);
+                /*
+                //Cria parametros para calculo do crc, em caso de dúvidas é possível verificar o calculo no site
+                //http://crccalc.com/
+                Parameters crcObjParameter1 = new Parameters("CRC-16/X-25", 16, 4129, 65535, true, true, 65535, 36061);
+                //Cria o objeto para calculo
+                Crc crcObj1 = new Crc(crcObjParameter1);
+                //Calcula o src, no caso esto passando um offset de 2 porque as duas primeiras posições não entram
+                //no cálculo do crc segundo o manual do protocolo
+                Byte[] crcResult1 = crcObj1.ComputeHash(bytes, 2, 12);*/
 
-                Byte[] tst = new Byte[pkt.packetLength - 1];
-                Array.Copy(bytes, 2, tst, 0, tst.Length);
-                
-                Byte[] crcResposta = new byte[2];
-
-                CalculaCRC(tst, ref crcResposta);
 
                 if (pkt.protocolNumber == Constants.GT06_LOGIN_MSG)
                 {
@@ -58,31 +62,41 @@ namespace TCPSocketTest
                     response.packetLength = 5;
                     response.protocolNumber = pkt.protocolNumber;
                     response.infoSerialNumber = pkt.infoSerialNumber;
-                    response.errorCheck = pkt.errorCheck;
                     response.stopBit = pkt.stopBit;
 
-
-                    
-
-
-
-
-                    Byte[] btResponse = new Byte[10];                    
+                    Byte[] btResponse = new Byte[10];     
+                    //Preenche o vetor de resposta (btResponse)               
                     Buffer.BlockCopy(BitConverter.GetBytes(response.startBit), 0, btResponse, 0, 2);
                     Buffer.BlockCopy(BitConverter.GetBytes(response.packetLength), 0, btResponse, 2, 1);
                     Buffer.BlockCopy(BitConverter.GetBytes(response.protocolNumber), 0, btResponse, 3, 1);
                     Buffer.BlockCopy(BitConverter.GetBytes(response.infoSerialNumber), 0, btResponse, 4, 2);
-                    Buffer.BlockCopy(BitConverter.GetBytes(response.errorCheck), 0, btResponse, 6, 2);
+
+                    //Cria parametros para calculo do crc, em caso de dúvidas é possível verificar o calculo no site
+                    //http://crccalc.com/
+                    Parameters crcObjParameter = new Parameters("CRC-16/X-25", 16, 4129, 65535, true, true, 65535, 36061);
+                    //Cria o objeto para calculo
+                    Crc crcObj = new Crc(crcObjParameter);
+                    //Calcula o src, no caso esto passando um offset de 2 porque as duas primeiras posições não entram
+                    //no cálculo do crc segundo o manual do protocolo
+                    Byte[] crcResult = crcObj.ComputeHash(btResponse, 2, 4);
+                    //O retorno eh um vetor de bytes de 8 posições, sendo que apenas as duas ultimas
+                    //posições possuem o valor do crc
+                    btResponse[6] = crcResult[crcResult.Length - 2];
+                    btResponse[7] = crcResult[crcResult.Length - 1];
+                    
                     Buffer.BlockCopy(BitConverter.GetBytes(response.stopBit), 0, btResponse, 8, 2);
 
                     
                     conexao.Send(btResponse);
 
+                }else
+                {
+                    String teste = "";
                 }
 
                 conexao.Close();
 
-                System.Threading.Thread.Sleep(5000);
+                //System.Threading.Thread.Sleep(5000);
             }
 
         }
