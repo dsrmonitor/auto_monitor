@@ -24,3 +24,16 @@
 agm-map {
   height: 300px;
 }
+
+.menu-icon {
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.menu-area{
+  height: 8%;
+  font-size: 36px;
+  display:block;
+  vertical-align: middle;
+  margin:0;
+}
