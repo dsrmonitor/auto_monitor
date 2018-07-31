@@ -33,7 +33,10 @@ export class LoginComponent implements OnInit {
           this.toastr.error("Login incorreto","Erro");
         }
       }
-    );
+    ),() =>{
+      this.blockUI.stop();
+      this.toastr.error("Erro ao tentar se conectar ao servidor","Erro");
+    };
   }
 
 }
