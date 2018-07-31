@@ -8,6 +8,7 @@ import com.sys.frotainteligente.Repository.VehiclesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,13 +41,15 @@ public class VehiclesResource {
 
     @PostMapping(path="/save-vehicle",  consumes = "application/json", produces = "application/json")
     public String createVehicle(@RequestBody VehiclesDTO vehiclesDTO){
-        Vehicles result = vehiclesRepository.save(VehiclesMapper.DTOToEntity(vehiclesDTO));
+        Vehicles vehicles = VehiclesMapper.DTOToEntity(vehiclesDTO);
+        vehicles.setUpdated_at(new Date());
+        Vehicles result = vehiclesRepository.save(vehicles);
         return gson.toJson(VehiclesMapper.EntityToDTO(result));
     }
 
     @PutMapping(path="/update-vehicle",  consumes = "application/json", produces = "application/json")
     public @ResponseBody String updateVehicle(@RequestBody VehiclesDTO vehiclesDTO){
-        vehiclesRepository.updateVehicle(vehiclesDTO.getId(),vehiclesDTO.getName(),vehiclesDTO.getChassi_number(),vehiclesDTO.getDescription(),vehiclesDTO.getLicense(),vehiclesDTO.getPhone_number());
+        vehiclesRepository.updateVehicle(vehiclesDTO.getId(),vehiclesDTO.getName(),vehiclesDTO.getChassi_number(),vehiclesDTO.getDescription(),vehiclesDTO.getLicense(),vehiclesDTO.getPhone_number(),new Date());
         return gson.toJson(true);
     }
 
