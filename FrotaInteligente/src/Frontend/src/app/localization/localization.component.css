@@ -1,0 +1,26 @@
+.home-background-open{
+  transform: translateX(250px);
+  padding: 30px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #eee;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.home-background-closed{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #eee;
+  padding: 30px;
+  margin: 0;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+agm-map {
+  height: 300px;
+}

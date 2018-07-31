@@ -41,7 +41,9 @@ import { AgmCoreModule } from '@agm/core';
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
     NgxMaskModule.forRoot(),
-    AgmCoreModule.forRoot()
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyDWbkfyG-0wuE8O0oPgIO4wWwbaUc9CFLk'
+    })
   ],
   providers: [LoginService,HomeService, VehiclesService],
   bootstrap: [AppComponent]
