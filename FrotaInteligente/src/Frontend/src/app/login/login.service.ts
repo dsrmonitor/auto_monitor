@@ -3,11 +3,12 @@ import {HttpClient} from "@angular/common/http";
 
 import {Login} from "./login.model";
 import {Observable} from "rxjs/Observable";
+import {ConstantesUtil} from "../util/constantes.util";
 
 @Injectable()
 export class LoginService {
 
-  private LoginUrl = 'http://192.168.1.110:8080/user/get-user-id';
+  private LoginUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8080/user/get-user-id';
 
   constructor(private http: HttpClient){}
 

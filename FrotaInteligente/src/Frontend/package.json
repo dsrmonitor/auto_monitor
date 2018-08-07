@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 192.168.1.110",
+    "start": "ng serve --host 192.168.1.111",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.3",
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.2.11",
     "@angular/cdk": "^5.2.5",
     "@angular/common": "^5.2.0",

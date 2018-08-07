@@ -1,10 +1,24 @@
 <co-menu></co-menu>
-<div [ngClass]="open ? opened : closed">
-  <div class="row menu-area">
-    <mat-icon class="menu-icon" (click)="changeOpt()"	>reorder</mat-icon>
-  </div>
-
-  <agm-map [latitude]="lat" [longitude]="lng">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  </agm-map>
+  <div [ngClass]="open ? opened : closed">
+    <div class="row menu-area">
+      <mat-icon class="menu-icon" (click)="changeOpt()"	>reorder</mat-icon>
+    </div>
+    <div class="col-md-12 data-area">
+      <div class="row">
+      <div class="col-md-12 map-area">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          <agm-marker [latitude]="lat2" [longitude]="lng2"></agm-marker>
+        </agm-map>
+      </div>
+      <div class="col-md-3 cars-area">
+        <div class="row">
+          <h1>Carros</h1>
+        </div>
+        <div class="row car-object" *ngFor="let vehicle of vehicles">
+          <input type="checkbox" id="exampleCheck1"> <h5>{{vehicle.name}}</h5>
+        </div>
+      </div>
+      </div>
+    </div>
 </div>

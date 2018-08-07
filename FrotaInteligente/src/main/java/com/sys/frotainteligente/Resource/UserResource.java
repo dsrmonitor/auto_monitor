@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import com.sys.frotainteligente.Entity.User;
 import com.sys.frotainteligente.Mapper.UserMapper;
 import com.sys.frotainteligente.Repository.UserRepository;
+import com.sys.frotainteligente.Util.ConstantesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://192.168.1.110:4200")
+@CrossOrigin(origins = "http://"+ConstantesUtil.IP_ADDRESS+":4200")
 @RequestMapping("/user")
 public class UserResource {
 

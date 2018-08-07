@@ -5,6 +5,7 @@ import com.sys.frotainteligente.DTO.VehiclesDTO;
 import com.sys.frotainteligente.Entity.Vehicles;
 import com.sys.frotainteligente.Mapper.VehiclesMapper;
 import com.sys.frotainteligente.Repository.VehiclesRepository;
+import com.sys.frotainteligente.Util.ConstantesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://192.168.1.110:4200")
+@CrossOrigin(origins = "http://"+ConstantesUtil.IP_ADDRESS+":4200")
 @RequestMapping("/vehicles")
 public class VehiclesResource {
 

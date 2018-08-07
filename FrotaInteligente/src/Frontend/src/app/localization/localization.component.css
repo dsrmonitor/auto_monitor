@@ -22,7 +22,7 @@
 }
 
 agm-map {
-  height: 300px;
+  height: 85vh;
 }
 
 .menu-icon {
@@ -36,4 +36,34 @@ agm-map {
   display:block;
   vertical-align: middle;
   margin:0;
+}
+
+.data-area{
+  margin: 0;
+  padding: 0;
+  /*border:solid purple;*/
+  height: 92%;
+}
+
+.map-area{
+  margin-left: 0px;
+  z-index: 1;
+}
+
+.cars-area{
+  margin-left: 15px;
+  position: absolute;
+  z-index: 2;
+
+  background: rgba(216,214,215,0.5);
+  height: 85vh;
+}
+
+.car-object{
+}
+
+input[type=checkbox], input[type=radio] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
 }
