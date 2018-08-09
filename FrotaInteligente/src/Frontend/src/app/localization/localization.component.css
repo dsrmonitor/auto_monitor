@@ -43,10 +43,11 @@ agm-map {
   padding: 0;
   /*border:solid purple;*/
   height: 92%;
+
 }
 
 .map-area{
-  margin-left: 0px;
+  margin-left: 0;
   z-index: 1;
 }
 
@@ -54,12 +55,20 @@ agm-map {
   margin-left: 15px;
   position: absolute;
   z-index: 2;
-
+  right: 0;
   background: rgba(216,214,215,0.5);
   height: 85vh;
 }
 
+.car-title{
+  background: rgba(216,214,215,0.9);
+  padding-left: 15px;
+}
+
 .car-object{
+  padding-left: 10px;
+  font-size: 3vh;
+  font-weight: 800;
 }
 
 input[type=checkbox], input[type=radio] {

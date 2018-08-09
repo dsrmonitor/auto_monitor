@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
+import {Component, OnInit} from '@angular/core';
 import {Vehicle} from "../vehicles/vehicles.model";
 
 @Component({
@@ -9,13 +8,13 @@ import {Vehicle} from "../vehicles/vehicles.model";
 })
 export class LocalizationComponent implements OnInit {
   vehicles: Vehicle[]= [];
+  vehiclesToShow: Vehicle[]= [];
   open: boolean = false;
   opened: string = 'row home-background-open';
   closed: string = 'row home-background-closed';
   lat: number = 51.678418;
   lng: number = 7.809007;
-  lat2: number =  51.878418;
-  lng2: number = 7.909007;
+
   constructor() { }
 
   ngOnInit() {
@@ -38,5 +37,15 @@ export class LocalizationComponent implements OnInit {
 
   changeOpt(){
     this.open = !this.open;
+  }
+
+  addPoint(vehicleId: number){
+
+    if(this.vehiclesToShow.find(x => x.id === vehicleId) == undefined){
+      this.vehiclesToShow.push(this.vehicles.find(x => x.id === vehicleId));
+    }else{
+      this.vehiclesToShow.splice(this.vehiclesToShow.findIndex(x => x.id === vehicleId),1);
+    }
+
   }
 }

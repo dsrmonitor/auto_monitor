@@ -7,17 +7,16 @@
       <div class="row">
       <div class="col-md-12 map-area">
         <agm-map [latitude]="lat" [longitude]="lng">
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          <agm-marker [latitude]="lat2" [longitude]="lng2"></agm-marker>
+          <agm-marker *ngFor="let car of vehiclesToShow" [latitude]="car.last_west_coord" [longitude]="car.last_south_coord" iconUrl="assets/img/Cinema-Batman-New-icon.png"></agm-marker>
         </agm-map>
       </div>
-      <div class="col-md-3 cars-area">
-        <div class="row">
+      <div class="col-md-2 cars-area">
+        <div class="row car-title">
           <h1>Carros</h1>
         </div>
-        <div class="row car-object" *ngFor="let vehicle of vehicles">
-          <input type="checkbox" id="exampleCheck1"> <h5>{{vehicle.name}}</h5>
-        </div>
+          <div class="row car-object" *ngFor="let vehicle of vehicles">
+            <mat-checkbox color="primary" id={{vehicle.id}} value={{vehicle.id}} (change)="addPoint(vehicle.id)" >{{vehicle.name}}</mat-checkbox>
+          </div>
       </div>
       </div>
     </div>

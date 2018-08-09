@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app.router";
 import {HttpClientModule} from "@angular/common/http";
 import {MatIconModule} from "@angular/material";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormsModule} from "@angular/forms";
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -38,6 +39,7 @@ import { AgmCoreModule } from '@agm/core';
     MatIconModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatCheckboxModule,
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
     NgxMaskModule.forRoot(),
