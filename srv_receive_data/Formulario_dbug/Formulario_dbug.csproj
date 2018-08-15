@@ -36,6 +36,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\..\..\Users\Cleidiane\Desktop\Temp\dll_nHibernate\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="CRC">
+      <HintPath>..\..\dlls\CRC.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.0.0\lib\net451\Npgsql.dll</HintPath>
       <Private>True</Private>
