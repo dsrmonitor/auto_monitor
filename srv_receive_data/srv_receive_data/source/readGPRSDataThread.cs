@@ -16,9 +16,11 @@ namespace srv_receive_data.source
     public class readGPRSDataThread
     {
         private Log objLog;
-        public readGPRSDataThread(Log log)
+        private int socketPort;
+        public readGPRSDataThread(Log log, int port)
         {
             objLog = log;
+            socketPort = port;
         }
         public void Call()
         {
@@ -39,7 +41,7 @@ namespace srv_receive_data.source
             // host running the application.
             IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 8686);
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, socketPort);
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,
