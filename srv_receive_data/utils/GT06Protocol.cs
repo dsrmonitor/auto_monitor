@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace dsrUtil.GT06Protocol
 {
-    
+    public class GenericMessagePacket
+    {
+        public UInt16 startBit { get; set; }
+        public Byte packetLength { get; set; }
+        public Byte protocolNumber { get; set; }
+        public Byte[] data { get; set; }
+        public UInt16 infoSerialNumber { get; set; }
+        public UInt16 errorCheck { get; set; }
+        public UInt16 stopBit { get; set; }
+    }
     public class LoginMessagePacket
     {
         public UInt16 startBit { get; set; }
