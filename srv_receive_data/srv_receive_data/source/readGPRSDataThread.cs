@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using utils;
 
 namespace srv_receive_data.source
 {
@@ -142,6 +143,27 @@ namespace srv_receive_data.source
                     Buffer.BlockCopy(BitConverter.GetBytes(response.stopBit), 0, btResponse, 8, 2);
                     break;
                case Constants.GT06_LOCATION_DATA:
+                    LocationDataPacket locationData = new LocationDataPacket();
+                    locationData.year         = pkt.data[0];
+                    locationData.month        = pkt.data[1];
+                    locationData.day          = pkt.data[2];
+                    locationData.hour         = pkt.data[3];
+                    locationData.minute       = pkt.data[4];
+                    locationData.second       = pkt.data[5];
+                    locationData.satCount     = pkt.data[6];
+                    locationData.south        = (pkt.data[7] << 24) + (pkt.data[8] << 16) + (pkt.data[9] << 8) + pkt.data[10];
+                    //O parametro com valor S está sendo usado de forma fixa mas deverá ser ajustado pois considera
+                    //que a coordenada está no hemisfério sul(o mesmo acontece para a longitude que usa como 
+                    //padrão W de oeste). A direção pode ser coletada no parametro course status
+                    locationData.convertedSouth = Conversions.gt06ToGeographicCoords(locationData.south, "S");
+                    locationData.west         = (pkt.data[11] << 24) + (pkt.data[12] << 16) + (pkt.data[13] << 8) + pkt.data[14];
+                    locationData.convertedWest = Conversions.gt06ToGeographicCoords(locationData.west, "W");
+                    locationData.speed        = pkt.data[15];
+                    locationData.courseStatus = BitConverter.ToUInt16(pkt.data, 16);
+                    locationData.mcc          = BitConverter.ToUInt16(pkt.data, 18);
+                    locationData.mnc          = pkt.data[20];
+                    locationData.lac          = BitConverter.ToUInt16(pkt.data, 21);
+                        //BitConverter.ToUInt16(pkt.data, 6);
                     string teste = "";
                     break;
 

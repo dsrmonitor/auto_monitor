@@ -38,6 +38,23 @@ namespace utils
             }
             return "";
         }
+        //Converte o formato que a coordenada chega do GT06 para coordenada geográfica
+        public static double gt06ToGeographicCoords(Int32 value, string direction)
+        {
+            double tmpValue = Convert.ToDouble(value) / 30000;
+            int degreee = Convert.ToInt32(Math.Floor(tmpValue / 60));
+            double minutes = (tmpValue % 60);
+            return ConvertDMSToDD(degreee, minutes, 0, direction);
+        }
+        public static double ConvertDMSToDD(int degrees, double minutes, double seconds, string direction)
+        {
+            double dd = degrees + minutes / 60 + seconds / (60 * 60);
 
+            if (direction == "S" || direction == "W")
+            {
+                dd = dd * -1;
+            } // Don't do anything for N or E
+            return dd;
+        }
     }
 }
