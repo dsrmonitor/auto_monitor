@@ -176,8 +176,10 @@ namespace srv_receive_data.source
 
             if (m.Success) {
                 log_vehicle_position result = new log_vehicle_position();
-                result.south = m.Groups[1].Value;
-                result.west = m.Groups[2].Value;
+                //vou converter as coordenadas por padrão, no futuro, se tivermos o 
+                //sistema no hemisfério nórte ou oriente isso deve ser ajustado 
+                result.south = "-"+m.Groups[1].Value;
+                result.west = "-"+m.Groups[2].Value;
                 result.speed = float.Parse(m.Groups[3].Value);
                 result.timestamp = DateTime.Now;
 
@@ -284,7 +286,7 @@ namespace srv_receive_data.source
         public static void loadEquipmentThatNeedsUpdate(Log objlog)
         {
             vehiclesRepository dao = new vehiclesRepository();
-            IList<vehicles> lista = dao.loadNeedPositionUpdate(2000000000);
+            IList<vehicles> lista = dao.loadNeedPositionUpdate(120);
             sms_queue_sendRepository dao_sms = new sms_queue_sendRepository();
             foreach (var veichle in lista)
             {

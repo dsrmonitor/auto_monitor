@@ -56,5 +56,13 @@ namespace utils
             } // Don't do anything for N or E
             return dd;
         }
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
     }
+    
 }

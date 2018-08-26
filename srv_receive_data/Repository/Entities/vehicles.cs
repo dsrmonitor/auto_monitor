@@ -20,5 +20,6 @@ namespace Repository.Entities
         public virtual string last_west_coord { get; set; }
         public virtual string last_south_coord { get; set; }
         public virtual float last_speed_info { get; set; }
+        public virtual string imei { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace dsrUtil.GT06Protocol
     }
     public class LoginMessagePacket
     {        
-        public UInt64 terminalID { get; set; }        
+        public string terminalID { get; set; }        
     }
     [Serializable()]
     public class LoginMessagePacketResponse

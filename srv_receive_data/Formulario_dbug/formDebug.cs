@@ -53,8 +53,8 @@ namespace Formulario_dbug
             threadSend = new sendDataThread(modemPort, objLog,serial_block);
             threadGprs = new readGPRSDataThread(objLog, 8686);
 
-            //thread01.Call();
-            //threadSend.Call();
+            thread01.Call();
+            threadSend.Call();
             threadGprs.Call();
 
         }

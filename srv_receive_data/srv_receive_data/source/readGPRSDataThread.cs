@@ -2,6 +2,8 @@
 using dsrUtil;
 using dsrUtil.constant;
 using dsrUtil.GT06Protocol;
+using Repository;
+using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,12 @@ namespace srv_receive_data.source
     {
         private Log objLog;
         private int socketPort;
+        private LoginMessagePacket objLogin;
         public readGPRSDataThread(Log log, int port)
         {
             objLog = log;
             socketPort = port;
+            objLogin = new LoginMessagePacket();
         }
         public void Call()
         {
@@ -55,7 +59,6 @@ namespace srv_receive_data.source
                 try
                 {
                     bytes = new byte[1024]; 
-                        
                     do
                     {
                         int bytesRec = handler.Receive(bytes);
@@ -79,6 +82,13 @@ namespace srv_receive_data.source
         private byte[] processData(byte[] bytes)
         {
             Byte[] btResponse = null;
+
+            //Cria parametros para calculo do crc, em caso de dúvidas é possível verificar o calculo no site
+            //http://crccalc.com/
+            Parameters crcObjParameter = new Parameters("CRC-16/X-25", 16, 4129, 65535, true, true, 65535, 36061);
+            //Cria o objeto para calculo
+            Crc crcObj = new Crc(crcObjParameter);
+
             //Get Package data
             GenericMessagePacket pkt = new GenericMessagePacket();
             pkt.startBit = BitConverter.ToUInt16(bytes, 0);
@@ -88,7 +98,7 @@ namespace srv_receive_data.source
             //o tamanho é calculado com base no tamanho total do pacote tirando 5 bytes
             //duvidas ver na documentação do protocolo
             pkt.data = new byte[pkt.packetLength - 5];
-            for (int i = 0; i < (pkt.data.Length - 1); i++)
+            for (int i = 0; i < (pkt.data.Length); i++)
             {
                 pkt.data[i] = bytes[i+4];
             }
@@ -108,17 +118,14 @@ namespace srv_receive_data.source
             switch (pkt.protocolNumber)
             {
                 case Constants.GT06_LOGIN_MSG:
-                    LoginMessagePacket objLogin = new LoginMessagePacket();
-                    objLogin.terminalID = BitConverter.ToUInt64(pkt.data, 0);
-
+                    objLogin.terminalID = Conversions.ByteArrayToString(pkt.data);
                     LoginMessagePacketResponse response = new LoginMessagePacketResponse();
+                    //Responde a requisição de login
                     response.startBit = pkt.startBit;
                     response.packetLength = 5;
                     response.protocolNumber = pkt.protocolNumber;
                     response.infoSerialNumber = pkt.infoSerialNumber;
                     response.stopBit = pkt.stopBit;
-
-
 
                     btResponse = new Byte[10];
                     //Preenche o vetor de resposta (btResponse)               
@@ -127,11 +134,6 @@ namespace srv_receive_data.source
                     Buffer.BlockCopy(BitConverter.GetBytes(response.protocolNumber), 0, btResponse, 3, 1);
                     Buffer.BlockCopy(BitConverter.GetBytes(response.infoSerialNumber), 0, btResponse, 4, 2);
 
-                    //Cria parametros para calculo do crc, em caso de dúvidas é possível verificar o calculo no site
-                    //http://crccalc.com/
-                    Parameters crcObjParameter = new Parameters("CRC-16/X-25", 16, 4129, 65535, true, true, 65535, 36061);
-                    //Cria o objeto para calculo
-                    Crc crcObj = new Crc(crcObjParameter);
                     //Calcula o src, no caso esto passando um offset de 2 porque as duas primeiras posições não entram
                     //no cálculo do crc segundo o manual do protocolo
                     Byte[] crcResult = crcObj.ComputeHash(btResponse, 2, 4);
@@ -163,8 +165,30 @@ namespace srv_receive_data.source
                     locationData.mcc          = BitConverter.ToUInt16(pkt.data, 18);
                     locationData.mnc          = pkt.data[20];
                     locationData.lac          = BitConverter.ToUInt16(pkt.data, 21);
-                        //BitConverter.ToUInt16(pkt.data, 6);
-                    string teste = "";
+
+                    
+                    vehiclesRepository vDao = new vehiclesRepository();
+                    vehicles vehicle = vDao.loadVehicleByImei(objLogin.terminalID);
+                    if (locationData != null && vehicle != null)
+                    {
+                        //Atualiza a posição do veículo
+                        vehicle.last_west_coord = Convert.ToString(locationData.convertedWest);
+                        vehicle.last_south_coord = Convert.ToString(locationData.convertedSouth);
+                        vehicle.last_speed_info = locationData.speed;
+                        vehicle.last_update = DateTime.Now;
+                        vDao.update(vehicle);
+
+                        //Insere o log
+                        log_vehicle_position vPos = new log_vehicle_position();
+                        vPos.vehicle_id = vehicle.id;
+                        vPos.west = vehicle.last_west_coord;
+                        vPos.south = vehicle.last_south_coord;
+                        vPos.speed = vehicle.last_speed_info;
+                        vPos.timestamp = DateTime.Now;
+                        log_vehicle_positionRepository lvpDao = new log_vehicle_positionRepository();
+                        lvpDao.insert(vPos);
+                    }
+
                     break;
 
             }
