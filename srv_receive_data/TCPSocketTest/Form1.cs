@@ -66,13 +66,7 @@ namespace TCPSocketTest
                         handler.Shutdown(SocketShutdown.Both);
                         handler.Close();
                     }
-
-
-
-
-                }
-
-                
+                }                
             }
             catch
             {
@@ -109,11 +103,11 @@ namespace TCPSocketTest
         private byte[] processData(byte[] bytes)
         {
             //Get Package data
-            LoginMessagePacket pkt = new LoginMessagePacket();
+            GenericMessagePacket pkt = new GenericMessagePacket();
             pkt.startBit = BitConverter.ToUInt16(bytes, 0);
             pkt.packetLength = bytes[2];
             pkt.protocolNumber = bytes[3];
-            pkt.terminalID = BitConverter.ToUInt64(bytes, 4);
+            //pkt.terminalID = BitConverter.ToUInt64(bytes, 4);
             pkt.infoSerialNumber = BitConverter.ToUInt16(bytes, 12);
             pkt.errorCheck = BitConverter.ToUInt16(bytes, 14);
             pkt.stopBit = BitConverter.ToUInt16(bytes, 16);

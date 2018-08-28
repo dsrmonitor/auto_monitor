@@ -18,7 +18,8 @@ namespace dsrUtil.constant
         public const string INIT_NAME = "nsrMonitor.ini";
 
         //Constantes relacionadas ao protocolo de comunicação do GT06
-        public const UInt16 GT06_LOGIN_MSG = 1;
+        public const byte GT06_LOGIN_MSG     =  1;
+        public const byte GT06_LOCATION_DATA = 18;
     }
 
 }

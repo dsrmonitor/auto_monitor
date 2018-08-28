@@ -43,5 +43,20 @@ namespace Repository
                 }
             }
         }
+        public vehicles loadVehicleByImei(string value)
+        {
+            using (ISession session = sessionFacrtoy.openSession())
+            {
+                try
+                {
+                    return session.Query<vehicles>()
+                                  .Where(p => p.imei.Contains(value)).SingleOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

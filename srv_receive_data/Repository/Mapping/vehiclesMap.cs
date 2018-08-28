@@ -24,6 +24,7 @@ namespace Repository.Mapping
             Map(c => c.last_west_coord);
             Map(c => c.last_south_coord);
             Map(c => c.last_speed_info);
+            Map(c => c.imei);
             Table("vehicles");
         }
     }

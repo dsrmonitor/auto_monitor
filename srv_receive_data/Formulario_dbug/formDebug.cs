@@ -24,6 +24,7 @@ namespace Formulario_dbug
 
         private readDataThread thread01;
         private sendDataThread threadSend;
+        private readGPRSDataThread threadGprs;
         private static readonly object serial_block = new object();
         public formDebug()
         {
@@ -50,9 +51,11 @@ namespace Formulario_dbug
 
             thread01 = new readDataThread(modemPort, objLog, serial_block);
             threadSend = new sendDataThread(modemPort, objLog,serial_block);
+            threadGprs = new readGPRSDataThread(objLog, 8686);
 
             thread01.Call();
             threadSend.Call();
+            threadGprs.Call();
 
         }
     }
