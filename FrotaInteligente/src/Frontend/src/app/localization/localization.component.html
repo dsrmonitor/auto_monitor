@@ -9,7 +9,7 @@
       <div class="row" style="margin-right: 10px" >
       <div class={{mapClass}}>
         <agm-map [latitude]="lat" [longitude]="lng">
-          <agm-marker *ngFor="let car of vehiclesToShow" [latitude]="car.last_west_coord" [longitude]="car.last_south_coord" iconUrl="assets/img/Cinema-Batman-New-icon.png"></agm-marker>
+          <agm-marker *ngFor="let car of vehiclesToShow" [latitude]="car.last_west_coord" [longitude]="car.last_south_coord" [label]="car.name" iconUrl="assets/img/Cinema-Batman-New-icon.png"></agm-marker>
         </agm-map>
       </div>
       <div class="col-md-2 cars-area" *ngIf="carsMenu">
