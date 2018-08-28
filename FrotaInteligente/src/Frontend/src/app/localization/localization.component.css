@@ -30,6 +30,12 @@ agm-map {
   cursor: pointer;
 }
 
+.menu-icon-open{
+  font-size: 48px;
+  cursor: pointer;
+  color: green;
+}
+
 .menu-area{
   height: 8%;
   font-size: 36px;
@@ -48,15 +54,20 @@ agm-map {
 
 .map-area{
   margin-left: 0;
-  z-index: 1;
+  margin-right: 0;
+  padding-right: 0;
+  position: relative;
+  display: inline;
+  transition: all 0.3s;
 }
 
 .cars-area{
-  margin-left: 15px;
-  position: absolute;
-  z-index: 2;
-  right: 0;
-  background: rgba(216,214,215,0.5);
+  margin-left: 0;
+  margin-right: 0;
+  float: right;
+  position: relative;
+  display: inline;
+  background: rgba(216,214,215,0.8);
   height: 85vh;
 }
 
@@ -75,4 +86,8 @@ input[type=checkbox], input[type=radio] {
   vertical-align: middle;
   position: relative;
   bottom: 1px;
+}
+
+.white-icon {
+  color: white;
 }

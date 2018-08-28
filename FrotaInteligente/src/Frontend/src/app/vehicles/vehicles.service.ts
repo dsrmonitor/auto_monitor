@@ -3,11 +3,12 @@ import {HttpClient} from "@angular/common/http";
 
 import {Observable} from "rxjs/Observable";
 import {Vehicle} from "./vehicles.model";
+import {ConstantesUtil} from "../util/constantes.util";
 
 @Injectable()
 export class VehiclesService{
 
-  private VehiclesUrl = 'http://192.168.1.110:8080/vehicles';
+  private VehiclesUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8080/vehicles';
 
   constructor(private http: HttpClient){}
 
