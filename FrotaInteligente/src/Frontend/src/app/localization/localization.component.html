@@ -17,7 +17,7 @@
           <h1>Carros</h1>
         </div>
           <div class="row car-object" *ngFor="let vehicle of vehicles">
-            <mat-checkbox color="primary" id={{vehicle.id}} value={{vehicle.id}} (change)="addPoint(vehicle.id)" >{{vehicle.name}}</mat-checkbox>
+            <mat-checkbox color="primary" id={{vehicle.id}} value={{vehicle.id}} (change)="addPoint(vehicle.id)" #model = "ngModel" [(ngModel)]="vehicle.inMenu" [disabled]="vehicle.last_south_coord == null || vehicle.last_west_coord == null">{{vehicle.name}}</mat-checkbox>
           </div>
       </div>
       </div>

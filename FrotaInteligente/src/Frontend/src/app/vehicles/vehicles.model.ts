@@ -11,8 +11,11 @@ export class Vehicle{
   public last_west_coord?: number;
   public last_south_coord?: number;
   public last_speed_info?: string;
+  public inMenu?: boolean;
 
-  constructor(){}
+  constructor(){
+    this.inMenu = false;
+  }
 }
 
 

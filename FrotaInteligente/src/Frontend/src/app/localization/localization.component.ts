@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Vehicle} from "../vehicles/vehicles.model";
 import {VehiclesService} from "../vehicles/vehicles.service";
 import {ToastrService} from "ngx-toastr";
+import {AgmMap} from "@agm/core";
 
 @Component({
   selector: 'app-localization',
@@ -9,6 +10,7 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./localization.component.css']
 })
 export class LocalizationComponent implements OnInit {
+  @ViewChild(AgmMap) agmMap: AgmMap;
   vehicles: Vehicle[]= [];
   vehiclesToShow: Vehicle[]= [];
   open: boolean = false;
@@ -17,16 +19,21 @@ export class LocalizationComponent implements OnInit {
   mapClass: string =  'col-md-12 map-area';
 
   carsMenu: boolean = false;
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lng: number ;
+  lat: number ;
 
-  constructor(private vehiclesService: VehiclesService, private toastr: ToastrService) { }
+  constructor(private vehiclesService: VehiclesService, private toastr: ToastrService) {
+
+  }
 
   ngOnInit() {
     this.vehiclesService.getAllVehicles().subscribe( result =>{
       this.vehicles = result;
+      if(this.vehicles.length > 0){
+        this.lat = this.vehicles[0].last_west_coord;
+        this.lng = this.vehicles[0].last_south_coord;
+      }
     });
-
   }
 
   changeOpt(){
@@ -45,14 +52,11 @@ export class LocalizationComponent implements OnInit {
   addPoint(vehicleId: number){
 
     if(this.vehiclesToShow.find(x => x.id === vehicleId) == undefined){
-      if(this.vehicles.find(x => x.id === vehicleId).last_west_coord == null || this.vehicles.find(x => x.id === vehicleId) == null){
-        this.toastr.warning("Este veiculo não possui as coordenadas necessarias!");
-      }else {
-        this.vehiclesToShow.push(this.vehicles.find(x => x.id === vehicleId));
-      }
+      this.vehiclesToShow.push(this.vehicles.find(x => x.id === vehicleId));
+      this.vehicles.find(x => x.id === vehicleId).inMenu = true;
     }else{
       this.vehiclesToShow.splice(this.vehiclesToShow.findIndex(x => x.id === vehicleId),1);
+      this.vehicles.find(x => x.id === vehicleId).inMenu = false;
     }
-
   }
 }

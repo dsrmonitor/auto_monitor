@@ -25,6 +25,12 @@ public class VehiclesMapper {
         if(vehicles.getDeleted_at() != null) {
             vehiclesDTO.setDeleted_at(sdf.format(vehicles.getDeleted_at()));
         }
+        if(vehicles.getLast_south_coord()!=null){
+            vehiclesDTO.setLast_south_coord(Double.valueOf(vehicles.getLast_south_coord()));
+        }
+        if(vehicles.getLast_west_coord() != null){
+            vehiclesDTO.setLast_west_coord(Double.valueOf(vehicles.getLast_west_coord()));
+        }
         return vehiclesDTO;
     }
 

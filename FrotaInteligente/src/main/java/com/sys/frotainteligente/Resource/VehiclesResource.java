@@ -25,6 +25,7 @@ public class VehiclesResource {
     @GetMapping("get-all-vehicles")
     public String getAllVehicles(){
         List<Vehicles> result = vehiclesRepository.findAll();
+        System.out.println(VehiclesMapper.ListEntityToListDTO(result).toString());
         return gson.toJson(VehiclesMapper.ListEntityToListDTO(result));
     }
 
