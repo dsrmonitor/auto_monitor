@@ -20,12 +20,12 @@ namespace srv_receive_data.source
     {
         private Log objLog;
         private int socketPort;
-        private LoginMessagePacket objLogin;
+        
         public readGPRSDataThread(Log log, int port)
         {
             objLog = log;
             socketPort = port;
-            objLogin = new LoginMessagePacket();
+            
         }
         public void Call()
         {
@@ -50,7 +50,7 @@ namespace srv_receive_data.source
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream, ProtocolType.Tcp);            
+                SocketType.Stream, ProtocolType.Tcp);
             listener.Bind(localEndPoint);
             listener.Listen(10);
             while (true)
@@ -58,16 +58,8 @@ namespace srv_receive_data.source
                 Socket handler = listener.Accept();
                 try
                 {
-                    bytes = new byte[1024]; 
-                    do
-                    {
-                        int bytesRec = handler.Receive(bytes);
-                        if (bytesRec > 0)
-                        {
-                            byte[] btResponse = processData(bytes);
-                            handler.Send(btResponse);
-                        }
-                    } while (true);
+                    var thread = new threadGprsConnections();
+                    thread.call(handler);
                 }
                 catch
                 {
@@ -76,7 +68,39 @@ namespace srv_receive_data.source
                 }
                 objLog.writeDebugLog("Aguardando dados GPRS ...");
                 Thread.Sleep(2000);
-            } 
+            }
+        }
+    }
+    public class threadGprsConnections {
+        private Socket handler;
+        private LoginMessagePacket objLogin;
+        public void call(Socket handl)
+        {
+            handler = handl;
+            objLogin = new LoginMessagePacket();
+            System.Threading.ThreadStart ts =
+            new System.Threading.ThreadStart(threadReceiveConnections);
+            System.Threading.Thread t =
+                new System.Threading.Thread(ts);
+            t.IsBackground = true;
+            t.Start();
+
+        }
+        private void threadReceiveConnections()
+        {
+            byte[] bytes = new byte[1024];
+            do
+            {
+                int bytesRec = handler.Receive(bytes);
+                if (bytesRec > 0)
+                {
+                    byte[] btResponse = processData(bytes);
+                    if (btResponse != null)
+                    {
+                        handler.Send(btResponse);
+                    }
+                }
+            } while (true);
         }
 
         private byte[] processData(byte[] bytes)
@@ -195,4 +219,5 @@ namespace srv_receive_data.source
             return btResponse;           
         }
     }
+   
 }
