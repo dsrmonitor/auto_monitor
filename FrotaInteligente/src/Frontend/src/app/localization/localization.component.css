@@ -69,6 +69,7 @@ agm-map {
   display: inline;
   background: rgba(216,214,215,0.8);
   height: 85vh;
+  overflow: auto;
 }
 
 .car-title{
