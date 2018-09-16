@@ -51,6 +51,7 @@ export class VehiclesCadastrarComponent implements OnInit {
     this.blockUI.start("Carregando Dados...");
     this.vehiclesService.getVehicleById(this.activateRoute.snapshot.params['idv']).subscribe(vehicles => {
       this.vehicle = vehicles;
+      this.vehicle.phone_number = this.vehicle.phone_number.trim();
       console.log(vehicles);
       this.blockUI.stop();
     });

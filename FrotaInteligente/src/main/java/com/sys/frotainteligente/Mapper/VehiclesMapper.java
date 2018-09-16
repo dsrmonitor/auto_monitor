@@ -16,6 +16,7 @@ public class VehiclesMapper {
         vehiclesDTO.setChassi_number(vehicles.getChassi_number());
         vehiclesDTO.setDescription(vehicles.getDescription());
         vehiclesDTO.setName(vehicles.getName());
+        vehiclesDTO.setImei(vehicles.getImei());
         vehiclesDTO.setLicense(vehicles.getLicense());
         vehiclesDTO.setPhone_number(vehicles.getPhone_number());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -38,6 +39,7 @@ public class VehiclesMapper {
         Vehicles vehicles = new Vehicles();
 
         vehicles.setName(vehiclesDTO.getName());
+        vehicles.setImei(vehiclesDTO.getImei());
         vehicles.setChassi_number(vehiclesDTO.getChassi_number());
         vehicles.setDescription(vehiclesDTO.getDescription());
         vehicles.setLicense(vehiclesDTO.getLicense());

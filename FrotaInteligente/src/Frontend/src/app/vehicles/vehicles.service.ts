@@ -8,7 +8,7 @@ import {ConstantesUtil} from "../util/constantes.util";
 @Injectable()
 export class VehiclesService{
 
-  private VehiclesUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8080/vehicles';
+  private VehiclesUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8888/vehicles';
 
   constructor(private http: HttpClient){}
 

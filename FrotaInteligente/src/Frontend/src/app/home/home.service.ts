@@ -8,7 +8,7 @@ import {ConstantesUtil} from "../util/constantes.util";
 @Injectable()
 export class HomeService {
 
-  private userUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8080/user/get-user-by-id';
+  private userUrl = 'http://'+ConstantesUtil.IP_ADDRESS+':8888/user/get-user-by-id';
 
   constructor(private http: HttpClient){}
 

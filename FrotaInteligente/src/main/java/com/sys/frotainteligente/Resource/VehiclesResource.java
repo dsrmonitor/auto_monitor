@@ -51,7 +51,7 @@ public class VehiclesResource {
 
     @PutMapping(path="/update-vehicle",  consumes = "application/json", produces = "application/json")
     public @ResponseBody String updateVehicle(@RequestBody VehiclesDTO vehiclesDTO){
-        vehiclesRepository.updateVehicle(vehiclesDTO.getId(),vehiclesDTO.getName(),vehiclesDTO.getChassi_number(),vehiclesDTO.getDescription(),vehiclesDTO.getLicense(),vehiclesDTO.getPhone_number(),new Date());
+        vehiclesRepository.updateVehicle(vehiclesDTO.getId(),vehiclesDTO.getName(),vehiclesDTO.getImei(), vehiclesDTO.getChassi_number(),vehiclesDTO.getDescription(),vehiclesDTO.getLicense(),vehiclesDTO.getPhone_number(),new Date());
         return gson.toJson(true);
     }
 

@@ -22,6 +22,10 @@ public class Vehicles {
     @Size(max=30)
     private String name;
 
+    @Column( name = "IMEI")
+    @Size(max=40)
+    private String imei;
+
     @Column( name = "PHONE_NUMBER")
     @Size(max=30)
     private String phone_number;
@@ -57,12 +61,13 @@ public class Vehicles {
     @Size(max=40)
     private String last_speed_info;
 
-    public Vehicles(@Size(max = 8) String license, @Size(max = 30) String name, @Size(max = 30) String phone_number, @Size(max = 30) String chassi_number, @Size(max = 200) String description, Date updated_at, 
+    public Vehicles(@Size(max = 8) String license, @Size(max = 30) String name, @Size(max = 30) String imei, @Size(max = 30) String phone_number, @Size(max = 30) String chassi_number, @Size(max = 200) String description, Date updated_at,
 	                Date deleted_at, Date last_update, @Size(max = 40) String last_west_coord, @Size(max = 40) String last_south_coord,
 					@Size(max = 40) String last_speed_info) {
 						
         this.license = license;
         this.name = name;
+        this.imei = imei;
         this.phone_number = phone_number;
         this.chassi_number = chassi_number;
         this.description = description;
@@ -100,6 +105,14 @@ public class Vehicles {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 
     public String getPhone_number() {
@@ -180,6 +193,7 @@ public class Vehicles {
                 "id=" + id +
                 ", license='" + license + '\'' +
                 ", name='" + name + '\'' +
+                ", imei='" + imei + '\'' +
                 ", phone_number='" + phone_number + '\'' +
                 ", chassi_number='" + chassi_number + '\'' +
                 ", description='" + description + '\'' +
