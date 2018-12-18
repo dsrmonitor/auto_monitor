@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   changeOpt(){
+    console.log("TESTE")
     this.open = !this.open;
   }
 

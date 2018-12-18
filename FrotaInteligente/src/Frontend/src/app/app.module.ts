@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {AppRoutingModule} from "./app.router";
 import {HttpClientModule} from "@angular/common/http";
-import {MatIconModule} from "@angular/material";
+import {MatIconModule, MatButtonModule, MatListModule} from "@angular/material";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FormsModule} from "@angular/forms";
 import { NgxMaskModule } from 'ngx-mask';
@@ -21,6 +21,10 @@ import { BlockUIModule } from 'ng-block-ui';
 import {VehiclesService} from "./vehicles/vehicles.service";
 import { LocalizationComponent } from './localization/localization.component';
 import { AgmCoreModule } from '@agm/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MenuNavComponent } from './menu-nav/menu-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { AgmCoreModule } from '@agm/core';
     MenuComponent,
     VehiclesComponent,
     VehiclesCadastrarComponent,
-    LocalizationComponent
+    LocalizationComponent,
+    MenuNavComponent
   ],
   imports: [
     BrowserModule,
@@ -38,14 +43,19 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     MatIconModule,
     HttpClientModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    MatSidenavModule,
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
     NgxMaskModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyDWbkfyG-0wuE8O0oPgIO4wWwbaUc9CFLk'
-    })
+    }),
+    LayoutModule,
+    MatButtonModule,
+    MatListModule
   ],
   providers: [LoginService,HomeService, VehiclesService],
   bootstrap: [AppComponent]

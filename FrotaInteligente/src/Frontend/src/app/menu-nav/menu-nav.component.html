@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar style="background-color: #b9f6ca">Menu</mat-toolbar>
+    <div class="profile-title">
+      <div class="profile-user">
+        <img src="http://www.rafacademy.com/wp-content/uploads/2017/03/user-default.png" class="img-responsive" alt="">
+      </div>
+      <div class="profile-username">
+        Lucas Alves
+      </div>
+      <div class="profile-type">
+        Secretario
+      </div>
+    </div>
+    <mat-nav-list >
+      <a mat-list-item (click)="goHome()" style="font-weight: 800;">Home</a>
+      <a mat-list-item (click)="goCarros()"  style="font-weight: 800;">Veiculos</a>
+      <a mat-list-item (click)="goLocalization()" style="font-weight: 800;">Localização</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar style="background-color: #b9f6ca;">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <h1 style="margin: auto">Frota Inteligente</h1>
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
