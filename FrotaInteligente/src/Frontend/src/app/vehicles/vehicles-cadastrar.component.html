@@ -51,6 +51,16 @@
                   <input type="text" class="form-control" [disabled]="disabledEdit" name="license" #license = "ngModel" maxlength="8" [(ngModel)]="vehicle.license"  placeholder="Digite a licensa..." >
                 </div>
               </div>
+              <div class="col-md-6" style="padding-bottom: 10px;">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" disabled type="button">
+                      <mat-icon style="vertical-align: middle;">assignment</mat-icon>
+                    </button>
+                  </div>
+                  <input type="text" class="form-control" [disabled]="disabledEdit" name="imei" #imei = "ngModel" maxlength="40" [(ngModel)]="vehicle.imei"  placeholder="Digite o IMEI..." >
+                </div>
+              </div>
               <div class="col-md-12" style="padding-bottom: 10px;">
                   <label for="description">Descrição:</label>
                   <textarea class="form-control" name="description" #description = "ngModel" [(ngModel)]="vehicle.description" [disabled]="disabledEdit" rows="5" id="description"></textarea>

@@ -5,6 +5,7 @@ public class VehiclesDTO {
     private long id;
     private String license;
     private String name;
+    private String imei;
     private String phone_number;
     private String chassi_number;
     private String description;
@@ -16,11 +17,12 @@ public class VehiclesDTO {
     private String last_speed_info;
 	
 
-    public VehiclesDTO(long id, String license, String name, String phone_number, String chassi_number, String description, String updated_at, String deleted_at,
+    public VehiclesDTO(long id, String license, String name, String imei, String phone_number, String chassi_number, String description, String updated_at, String deleted_at,
 	                   String last_update, Double last_west_coord, Double last_south_coord, String last_speed_info) {
         this.id = id;
         this.license = license;
         this.name = name;
+        this.imei = imei;
         this.phone_number = phone_number;
         this.chassi_number = chassi_number;
         this.description = description;
@@ -58,6 +60,18 @@ public class VehiclesDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
     }
 
     public String getPhone_number() {

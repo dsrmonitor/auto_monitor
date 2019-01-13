@@ -2,6 +2,7 @@ export class Vehicle{
   public id?: number;
   public license?: string;
   public name?: string;
+  public imei?: string;
   public phone_number?:string;
   public chassi_number?:string;
   public description?:string;
