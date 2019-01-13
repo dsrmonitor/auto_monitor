@@ -58,7 +58,7 @@ namespace srv_receive_data.source
                 Socket handler = listener.Accept();
                 try
                 {
-                    var thread = new threadGprsConnections();
+                    var thread = new threadGprsConnections(objLog);
                     thread.call(handler);
                 }
                 catch
@@ -74,6 +74,11 @@ namespace srv_receive_data.source
     public class threadGprsConnections {
         private Socket handler;
         private LoginMessagePacket objLogin;
+        Log objLog;
+        public threadGprsConnections(Log log)
+        {
+            objLog = log;
+        }
         public void call(Socket handl)
         {
             handler = handl;
@@ -91,14 +96,21 @@ namespace srv_receive_data.source
             byte[] bytes = new byte[1024];
             do
             {
-                int bytesRec = handler.Receive(bytes);
-                if (bytesRec > 0)
-                {
-                    byte[] btResponse = processData(bytes);
-                    if (btResponse != null)
+                try {
+                    int bytesRec = handler.Receive(bytes);
+                    if (bytesRec > 0)
                     {
-                        handler.Send(btResponse);
+                        byte[] btResponse = processData(bytes);
+                        if (btResponse != null)
+                        {
+                            handler.Send(btResponse);
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    objLog.writeExceptionLog("Erro na leitura de dados:"+ex.Message);
+                    return;
                 }
             } while (true);
         }
@@ -181,6 +193,7 @@ namespace srv_receive_data.source
                     //O parametro com valor S está sendo usado de forma fixa mas deverá ser ajustado pois considera
                     //que a coordenada está no hemisfério sul(o mesmo acontece para a longitude que usa como 
                     //padrão W de oeste). A direção pode ser coletada no parametro course status
+                    
                     locationData.convertedSouth = Conversions.gt06ToGeographicCoords(locationData.south, "S");
                     locationData.west         = (pkt.data[11] << 24) + (pkt.data[12] << 16) + (pkt.data[13] << 8) + pkt.data[14];
                     locationData.convertedWest = Conversions.gt06ToGeographicCoords(locationData.west, "W");
@@ -196,8 +209,12 @@ namespace srv_receive_data.source
                     if (locationData != null && vehicle != null)
                     {
                         //Atualiza a posição do veículo
-                        vehicle.last_west_coord = Convert.ToString(locationData.convertedWest);
-                        vehicle.last_south_coord = Convert.ToString(locationData.convertedSouth);
+                        //Vou inverter temporáriamente as coordenadas até o lucas corrigir o site, depois disso devo
+                        //corrigir
+                        vehicle.last_south_coord = Convert.ToString(locationData.convertedWest);
+                        vehicle.last_south_coord = vehicle.last_south_coord.Replace(",", ".");
+                        vehicle.last_west_coord = Convert.ToString(locationData.convertedSouth);
+                        vehicle.last_west_coord = vehicle.last_west_coord.Replace(",", ".");
                         vehicle.last_speed_info = locationData.speed;
                         vehicle.last_update = DateTime.Now;
                         vDao.update(vehicle);
@@ -209,6 +226,7 @@ namespace srv_receive_data.source
                         vPos.south = vehicle.last_south_coord;
                         vPos.speed = vehicle.last_speed_info;
                         vPos.timestamp = DateTime.Now;
+                        vPos.origin = 1;
                         log_vehicle_positionRepository lvpDao = new log_vehicle_positionRepository();
                         lvpDao.insert(vPos);
                     }

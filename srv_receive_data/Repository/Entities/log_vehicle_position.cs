@@ -14,6 +14,7 @@ namespace Repository.Entities
         public virtual string south { get; set; }
         public virtual float speed { get; set; }
         public virtual DateTime timestamp { get; set; }
+        public virtual int origin { get; set; }
 
     }
 }

@@ -96,6 +96,7 @@ namespace srv_receive_data.source
             if (vPos != null && vehicle != null)
             {
                 vPos.vehicle_id = vehicle.id;
+                vPos.origin = 2;
                 vehicle.last_west_coord = vPos.west;
                 vehicle.last_south_coord = vPos.south;
                 vehicle.last_speed_info = vPos.speed;
@@ -178,8 +179,8 @@ namespace srv_receive_data.source
                 log_vehicle_position result = new log_vehicle_position();
                 //vou converter as coordenadas por padrão, no futuro, se tivermos o 
                 //sistema no hemisfério nórte ou oriente isso deve ser ajustado 
-                result.south = "-"+m.Groups[1].Value;
-                result.west = "-"+m.Groups[2].Value;
+                result.west = "-"+m.Groups[1].Value;
+                result.south = "-"+m.Groups[2].Value;
                 result.speed = float.Parse(m.Groups[3].Value);
                 result.timestamp = DateTime.Now;
 

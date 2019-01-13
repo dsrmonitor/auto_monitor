@@ -18,6 +18,7 @@ namespace Repository.Mapping
             Map(c => c.south);
             Map(c => c.speed);
             Map(c => c.timestamp);
+            Map(c => c.origin);
             Table("log_vehicle_position");
         }
     }
