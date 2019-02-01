@@ -1,0 +1,19 @@
+
+
+<mat-toolbar style="background-color: #009688">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <h1>Frota Inteligente</h1>
+  </div>
+  <span class="spacer"></span>
+  <button mat-button [matMenuTriggerFor]="menu" ><mat-icon>persons</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item><mat-icon>supervised_user_circle</mat-icon>Perfil</button>
+    <button mat-menu-item><mat-icon>settings</mat-icon>Configurações</button>
+    <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon>Sair</button>
+  </mat-menu>
+</mat-toolbar>
