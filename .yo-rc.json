@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.system.frota"
+    },
+    "jhipsterVersion": "5.8.1",
+    "applicationType": "microservice",
+    "baseName": "frotaInteligente",
+    "packageName": "com.system.frota",
+    "packageFolder": "com/system/frota",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YzY2NjlkYzI5ZGY5MTU1YWY3MTFkNTMxNmI5Y2U0ODAxM2I4Mjc3MjRlZDQxYjcxNmNmOTczM2JiMmY5ZWMyM2NkOTk0ZTUyYTFkYWMzMGY3YWFkYzc0NzI3ZDkzYTgxZDdhNmM2NDRkOWY1YjcyNTUzZjAyODU3OGY1ZmI5YjQ=",
+    "testFrameworks": [
+      "gatling"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

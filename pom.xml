@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mycompany.myapp</groupId>
+    <groupId>com.system.frota</groupId>
     <artifactId>frota-inteligente</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -344,21 +344,6 @@
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.3.0</version>
-        </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
 
@@ -383,7 +368,6 @@
                         </path>
 
                     </annotationProcessorPaths>
-
                 </configuration>
             </plugin>
             <plugin>
@@ -538,11 +522,11 @@
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                         <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                         <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:5432/FrotaInteligente</url>
+                        <url>jdbc:postgresql://localhost:5432/frotaInteligente</url>
                         <defaultSchemaName></defaultSchemaName>
-                        <username>FrotaInteligente</username>
+                        <username>frotaInteligente</username>
                         <password></password>
-                        <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                        <referenceUrl>hibernate:spring:com.system.frota.domain?dialect=org.hibernate.dialect.PostgreSQL82Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>
                     </configuration>
