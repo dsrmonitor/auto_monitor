@@ -1,0 +1,33 @@
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation" >
+
+    <mat-toolbar style="background-color: #e0e0e0"><h1>Carros</h1></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let vehicle of carsMenu" >
+        <mat-checkbox style="margin-right: 5px" (change)="addPoint(vehicle.carObject.id)"><span class="nav-caption">{{vehicle.carObject.name}}</span></mat-checkbox>
+      </a>
+    </mat-nav-list>
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <co-map-header (sidenavToggle)="sidenav.toggle()"></co-map-header>
+    <main style="height: 91%;overflow-y: auto; padding: 0">
+      <div style="width: 100%; height: 100%; margin: 0; padding: 0">
+        <agm-map zoom="1" #gm>
+          <agm-marker  *ngFor="let item of carsToShow" (mouseOver)="onMouseOver(infoWindow,gm)" (mouseOut)="onMouseOut(infoWindow,gm)"  [latitude]="item.lastSouthCoord" [longitude]="item.lastWstCoord" >
+            <agm-info-window [disableAutoPan]="false" #infoWindow>
+              <div>
+                {{item.name}}
+              </div>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </main>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

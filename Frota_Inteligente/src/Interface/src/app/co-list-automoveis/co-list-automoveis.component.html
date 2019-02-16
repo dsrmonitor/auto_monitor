@@ -1,0 +1,59 @@
+<div class="col-md-12" style="height: 100%; overflow-y: auto">
+  <h1 style="margin-top: 15px; margin-bottom: 15px;">Automóveis</h1>
+    <mat-form-field style="width: 100%">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+    </mat-form-field>
+  <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-12">
+      <button  style="margin:2px" mat-mini-fab color="primary" (click)="newCar()" ><mat-icon>add</mat-icon></button>
+      <button  style="margin:2px" mat-mini-fab [disabled]="selection.selected.length !== 1" (click)="editCar()"><mat-icon>create</mat-icon></button>
+      <button  style="margin:2px" mat-mini-fab [disabled]="selection.selected.length < 1" color="warn" (click)="deleteCar()"><mat-icon>delete</mat-icon></button>
+    </div>
+  </div>
+  <div  class="mat-elevation-z8" style="overflow-x: auto; max-height: 85%">
+    <table mat-table style="width: 100%;" [dataSource]="dataSource">
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header > Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="chassiNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Chassi </th>
+        <td mat-cell *matCellDef="let element"> {{element.chassiNumber}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="imei">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> IMEI </th>
+        <td mat-cell *matCellDef="let element"> {{element.imei}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selection.toggle(row)"></tr>
+    </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 100]"></mat-paginator>
+  </div>
+</div>

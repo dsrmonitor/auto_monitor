@@ -1,0 +1,44 @@
+<mat-card style="height: 100%; overflow-y: auto;">
+  <h2>{{titulo}} Carro</h2>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input type="text" name="nome" [(ngModel)]="car.name" matInput placeholder="Nome do carro...">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input type="text" name="telefone"  [(ngModel)]="car.phoneNumber" matInput placeholder="Telefone..." mask="+00 (00) 0000-0000">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input type="text" name="chassi" [(ngModel)]="car.chassiNumber" matInput placeholder="Chassi..." >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input type="text" name="licenca" [(ngModel)]="car.license" matInput placeholder="Licença..." maxlength="8">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field class="example-full-width" style="width: 100%">
+        <input type="text" name="imei" [(ngModel)]="car.imei" matInput placeholder="IMEI..." maxlength="8">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" style="width: 100%;">
+        <textarea matInput name="descricao" [(ngModel)]="car.description" placeholder="Descrição..."></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button mat-raised-button style="margin: 3px" (click)="back()"  color="warn">Cancelar</button>
+      <button mat-raised-button style="margin: 3px" (click)="save()" color="primary">Salvar</button>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,28 @@
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation" >
+
+      <mat-toolbar style="background-color: #009688"><h1>MENU</h1></mat-toolbar>
+      <div class="profile-title">
+        <div class="profile-user">
+          <img src="http://www.rafacademy.com/wp-content/uploads/2017/03/user-default.png" class="img-responsive" alt="">
+        </div>
+        <div class="profile-username">
+          Lucas
+        </div>
+        <div class="profile-type">
+          Secretario
+        </div>
+      </div>
+      <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+      <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+      <main style="overflow-y: auto;height: 90%; ">
+        <router-outlet></router-outlet>
+      </main>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+

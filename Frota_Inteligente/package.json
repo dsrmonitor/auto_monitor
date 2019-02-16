@@ -1,0 +1,25 @@
+{
+    "name": "frota-inteligente",
+    "version": "0.0.0",
+    "description": "Description for FrotaInteligente",
+    "private": true,
+    "license": "UNLICENSED",
+    "cacheDirectories": [
+        "node_modules"
+    ],
+    "devDependencies": {
+        "generator-jhipster": "5.8.1"
+    },
+    "engines": {
+        "node": ">=8.9.0"
+    },
+    "dependencies": {
+        "@agm/core": "^1.0.0-beta.5",
+        "@angular/animations": "^7.2.3",
+        "@angular/common": "^7.2.3",
+        "@angular/core": "^7.2.3",
+        "ngx-toastr": "^9.1.1",
+        "rxjs": "^6.4.0",
+        "zone.js": "^0.8.29"
+    }
+}
