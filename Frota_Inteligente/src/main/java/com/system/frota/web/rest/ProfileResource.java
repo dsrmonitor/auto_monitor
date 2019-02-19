@@ -19,7 +19,6 @@ import java.util.Optional;
 /**
  * REST controller for managing Profile.
  */
-@CrossOrigin( origins = "localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class ProfileResource {
@@ -129,13 +128,4 @@ public class ProfileResource {
         }
     }
 
-    @GetMapping("/profiles/new")
-    public ResponseEntity<Boolean> newUser(){
-        ProfileDTO profileDTO = new ProfileDTO();
-        profileDTO.setUserPassword("12345");
-        profileDTO.setUserName("lucas");
-        profileDTO.setUserLogin("lucas");
-        profileService.save(profileDTO);
-        return ResponseEntity.ok(true);
-    }
 }

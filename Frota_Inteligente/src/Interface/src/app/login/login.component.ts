@@ -6,6 +6,8 @@ import {Login} from "./login.model";
 import {ToastrService} from "ngx-toastr";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {CustomerService} from "../CustomerService";
+import {ConstantesUtil} from "../util/constantes.util";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'co-login',
@@ -19,30 +21,27 @@ export class LoginComponent implements OnInit {
   login: Login = new Login();
 
   ngOnInit(): void {
-    this.newUser();
   }
 
 
 
-  constructor(private loginService: LoginService, private customer: CustomerService, private router: Router) {
+  constructor(private loginService: LoginService, private customer: CustomerService, private router: Router, private snackBar: MatSnackBar) {
   }
 
-  newUser(){
-    this.loginService.createUser().subscribe(res =>{
-
-    });
-  }
 
   tryLogin() {
+    this.blockUI.start(ConstantesUtil.LOADING);
     this.loginService.verifyLogin(this.login).subscribe(
         r => {
+          this.blockUI.stop();
           if (r) {
+            this.snackBar.open(ConstantesUtil.LOGIN_SUCESS,ConstantesUtil.CLOSE,{duration:4000});
             this.customer.setToken(''+r);
             this.router.navigate(['frota-inteligente']);
           }
         }, r => {
-          console.log("ERRO CARAI");
-          alert(r.error.error);
+          this.blockUI.stop();
+          this.snackBar.open(ConstantesUtil.INVALID_DATA,ConstantesUtil.CLOSE,{duration:4000});
         });
   }
 

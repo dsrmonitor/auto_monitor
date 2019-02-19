@@ -36,7 +36,6 @@ export class CoGeomapComponent implements OnInit {
     this.blockUI.start("Carregando Dados")
     this.vehiclesService.getAllCars().subscribe( result =>{
       if(result.length > 0){
-
         for(let car of result){
           if(car.lastSouthCoord !== undefined && car.lastSouthCoord !== null && this.lat === undefined){
             this.agmMap.mapReady.subscribe(map => {
@@ -54,8 +53,6 @@ export class CoGeomapComponent implements OnInit {
         }
         this.blockUI.stop();
       }
-
-
     });
 
     // this.source.subscribe(val => this.updatePosition());
@@ -63,7 +60,6 @@ export class CoGeomapComponent implements OnInit {
 
   updatePosition(){
     let ids: number[] = [];
-    console.log("ENTREI")
     if(this.carsToShow.length > 0) {
 
       for (let item of this.carsToShow) {

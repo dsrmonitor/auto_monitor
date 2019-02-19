@@ -70,7 +70,6 @@ export class CoGeomapRouteComponent implements OnInit {
 
   updatePosition(){
     let ids: number[] = [];
-    console.log("ENTREI")
     if(this.carsToShow.length > 0) {
 
       for (let item of this.carsToShow) {

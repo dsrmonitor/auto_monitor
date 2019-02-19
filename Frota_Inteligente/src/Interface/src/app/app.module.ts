@@ -37,6 +37,8 @@ import {AgmCoreModule} from "@agm/core";
 import { CoGeomapRouteComponent } from './co-geomap-route/co-geomap-route.component';
 import {CoMapHeaderRouteComponent} from "./co-geomap-route/co-map-header-route/co-map-header-route.component";
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AppRoutingModule,
     HttpClientModule,
     MatInputModule,
+    MatSnackBarModule,
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
@@ -64,7 +67,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatSidenavModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
     NgxMaskModule.forRoot(),

@@ -1,4 +1,10 @@
 export const environment = {
-  production: true,
   apiUrl: '/api',
+  production: false,
+  sessionTimeout: 30,
+  auth: {
+    loginUrl: '/logon',
+    userStorage: sessionStorage,
+    userStorageIntex: 'user'
+  }
 };
