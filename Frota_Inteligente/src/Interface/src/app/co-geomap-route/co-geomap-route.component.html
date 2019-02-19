@@ -1,0 +1,47 @@
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation" >
+
+    <mat-toolbar style="background-color: #e0e0e0"><h1>Carros</h1></mat-toolbar>
+    <div style="padding-top: 10px; align-items: center;display: flex;flex-flow: column wrap;">
+      <mat-form-field class="example-full-width" style="margin-right: 5px;">
+        <input matInput [(ngModel)]="dateIni" disabled [matDatepicker]="picker1">
+        <mat-placeholder>Data de Inicio</mat-placeholder>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker1 disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" disabled placeholder="Data de Termino">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <hr>
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let vehicle of carsMenu" >
+        <mat-checkbox style="margin-right: 5px" (change)="addPoint(vehicle.carObject.id)"><span class="nav-caption">{{vehicle.carObject.name}}</span></mat-checkbox>
+      </a>
+    </mat-nav-list>
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <co-map-header--route (sidenavToggle)="sidenav.toggle()"></co-map-header--route>
+    <main style="height: 91%;overflow-y: auto; padding: 0">
+      <div style="width: 100%; height: 100%; margin: 0; padding: 0">
+        <agm-map zoom="1" #gm>
+          <agm-marker  *ngFor="let item of carsToShow" (mouseOver)="onMouseOver(infoWindow,gm)" (mouseOut)="onMouseOut(infoWindow,gm)"  [latitude]="item.lastSouthCoord" [longitude]="item.lastWstCoord" >
+            <agm-info-window [disableAutoPan]="false" #infoWindow>
+              <div>
+                {{item.name}}
+              </div>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </main>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

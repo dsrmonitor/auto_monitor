@@ -2,9 +2,7 @@ package com.system.frota;
 
 import com.system.frota.config.ApplicationProperties;
 import com.system.frota.config.DefaultProfileUtil;
-
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,4 +93,5 @@ public class FrotaInteligenteApp {
             contextPath,
             env.getActiveProfiles());
     }
+
 }

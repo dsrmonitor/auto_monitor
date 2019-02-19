@@ -129,5 +129,13 @@ public class ProfileResource {
         }
     }
 
-
+    @GetMapping("/profiles/new")
+    public ResponseEntity<Boolean> newUser(){
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setUserPassword("12345");
+        profileDTO.setUserName("lucas");
+        profileDTO.setUserLogin("lucas");
+        profileService.save(profileDTO);
+        return ResponseEntity.ok(true);
+    }
 }

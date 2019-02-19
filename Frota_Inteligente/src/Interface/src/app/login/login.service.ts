@@ -16,4 +16,8 @@ export class LoginService {
   verifyLogin(login: Login):Observable<number>{
     return this.http.get<number>(`${this.resourceUrl}/profiles/login/${login.user_code}/${login.user_password}`);
   }
+
+  createUser():Observable<boolean>{
+    return this.http.get<boolean>(`${this.resourceUrl}/profiles/new`);
+  }
 }

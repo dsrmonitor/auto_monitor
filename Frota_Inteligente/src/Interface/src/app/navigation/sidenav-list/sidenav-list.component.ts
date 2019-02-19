@@ -22,6 +22,8 @@ export class SidenavListComponent implements OnInit {
     }else if(page === 2){
       this.router.navigate(['frota-inteligente/geo-cars'])
     }else if(page === 3){
+      this.router.navigate(['frota-inteligente/geo-cars-route'])
+    }else if(page === 4){
       this.router.navigate(['frota-inteligente/list-cars'])
     }
 

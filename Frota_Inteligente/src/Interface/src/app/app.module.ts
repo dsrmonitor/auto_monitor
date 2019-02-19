@@ -9,7 +9,7 @@ import {LoginService} from "./login/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule, MatToolbarModule, MatListModule} from "@angular/material";
+import {MatButtonModule, MatToolbarModule, MatListModule, MatNativeDateModule} from "@angular/material";
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HomeComponent } from './home/home.component';
@@ -34,7 +34,9 @@ import {ToastrModule} from "ngx-toastr";
 import {CoGeomapComponent} from "./co-geomap/co-geomap.component";
 import {CoMapHeaderComponent} from "./co-geomap/co-map-header/co-map-header.component";
 import {AgmCoreModule} from "@agm/core";
-
+import { CoGeomapRouteComponent } from './co-geomap-route/co-geomap-route.component';
+import {CoMapHeaderRouteComponent} from "./co-geomap-route/co-map-header-route/co-map-header-route.component";
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,9 @@ import {AgmCoreModule} from "@agm/core";
     CoListAutomoveisComponent,
     CoCreateAutomovelComponent,
     CoGeomapComponent,
-    CoMapHeaderComponent
+    CoMapHeaderComponent,
+    CoGeomapRouteComponent,
+    CoMapHeaderRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,9 @@ import {AgmCoreModule} from "@agm/core";
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
     NgxMaskModule.forRoot(),
