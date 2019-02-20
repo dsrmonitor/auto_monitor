@@ -5,7 +5,7 @@
     <mat-toolbar style="background-color: #e0e0e0"><h1>Carros</h1></mat-toolbar>
     <div style="padding-top: 10px; align-items: center;display: flex;flex-flow: column wrap;">
       <mat-form-field class="example-full-width" style="margin-right: 5px;">
-        <input matInput [(ngModel)]="dateIni" disabled [matDatepicker]="picker1">
+        <input matInput  disabled [matDatepicker]="picker1">
         <mat-placeholder>Data de Inicio</mat-placeholder>
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker1 disabled="false"></mat-datepicker>
