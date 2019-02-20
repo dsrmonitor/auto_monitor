@@ -4,7 +4,7 @@
 
 export const environment = {
   apiUrl: '/api',
-  production: false,
+  production: true,
   sessionTimeout: 30,
   auth: {
     loginUrl: '/logon',

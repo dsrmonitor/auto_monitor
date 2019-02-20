@@ -16,8 +16,8 @@
     <co-map-header (sidenavToggle)="sidenav.toggle()"></co-map-header>
     <main style="height: 91%;overflow-y: auto; padding: 0">
       <div style="width: 100%; height: 100%; margin: 0; padding: 0">
-        <agm-map zoom="1" #gm>
-          <agm-marker  *ngFor="let item of carsToShow" (mouseOver)="onMouseOver(infoWindow,gm)" (mouseOut)="onMouseOut(infoWindow,gm)"  [latitude]="item.lastSouthCoord" [longitude]="item.lastWstCoord" >
+        <agm-map #gm>
+          <agm-marker  *ngFor="let item of carsToShow" (mouseOver)="onMouseOver(infoWindow,gm)" (mouseOut)="onMouseOut(infoWindow,gm)"  [latitude]="item.lastWstCoord" [longitude]="item.lastSouthCoord" >
             <agm-info-window [disableAutoPan]="false" #infoWindow>
               <div>
                 {{item.name}}

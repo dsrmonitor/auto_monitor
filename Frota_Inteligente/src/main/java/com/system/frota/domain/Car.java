@@ -10,7 +10,7 @@ import java.util.Objects;
  * A Car.
  */
 @Entity
-@Table(name = "car")
+@Table(name = "vehicles")
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class Car implements Serializable {
     private LocalDateTime lastUpdate;
 
     @Size(max = 40)
-    @Column(name = "last_wst_coord", length = 40)
+    @Column(name = "last_west_coord", length = 40)
     private String lastWstCoord;
 
     @Size(max = 40)
